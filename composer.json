@@ -1,0 +1,35 @@
+{
+    "name": "codestartechnologies/wordpress-plugin-starter",
+    "description": "A boiler-plate for a wordpress plugin",
+    "type": "project",
+    "keywords": [
+        "wordpress",
+        "wordpress plugin boilerplate",
+        "boilerplate for wordpress plugin",
+        "wordpress plugin generator",
+        "wps",
+        "wordpress plugin starter",
+        "wordpress plugin builder"
+    ],
+    "readme": "README.MD",
+    "license": "AGPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Codestartechnologies\\WordpressPluginStarter\\": "src/",
+            "App\\": "app/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Chijindu G. Nzeako",
+            "email": "chijindunzeako517@gmail.com"
+        }
+    ],
+    "support": {
+        "email": "codestartechng@gmail.com"
+    },
+    "require": {}
+}
