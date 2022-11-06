@@ -81,10 +81,10 @@ if ( ! class_exists( 'Shortcodes' ) ) {
          * @return string
          * @since 1.0.0
          */
-        final public function shortcode_cb( array $atts = array(), string $content = '', string $tag = '' ) : string
+        final public function shortcode_cb( array $atts, string $content, string $tag ) : string
         {
             $atts = array_change_key_case( (array) $atts, CASE_LOWER );
-            $shortcode_attributes = shortcode_atts( $this->default_attributes(), $atts, $this->tag );
+            $shortcode_attributes = shortcode_atts( $this->default_attributes(), $atts, $tag );
             ob_start();
             $this->display( $shortcode_attributes, $content, $tag );
             return ob_get_clean();

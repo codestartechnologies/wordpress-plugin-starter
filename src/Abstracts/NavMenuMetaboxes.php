@@ -122,7 +122,7 @@ if ( ! class_exists( 'NavMenuMetaboxes' ) ) {
             $walker = new Walker_Nav_Menu_Checklist( $db_fields );
             $removed_args = array( 'action', 'customlink-tab', 'edit-menu-item', 'menu-item', 'page-tab', '_wpnonce', );
 
-            $this->load_view( 'meta_boxes.wps-nav-menu-metabox', array(
+            $this->load_core_view( 'wps-nav-menu-metabox', array(
                 'nav_menu_selected_id'  => $nav_menu_selected_id,
                 'my_items'              => $my_items,
                 'walker'                => $walker,

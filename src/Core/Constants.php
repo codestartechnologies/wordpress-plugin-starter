@@ -95,14 +95,14 @@ if ( ! class_exists( 'Constants' ) ) {
              * Plugin admin views directory
              */
             if ( ! defined( 'WPS_ADMIN_VIEWS_PATH' ) ) {
-                define( 'WPS_ADMIN_VIEWS_PATH', trailingslashit( WPS_PATH . 'views/admin' ) );
+                define( 'WPS_ADMIN_VIEWS_PATH', trailingslashit( 'views/admin' ) );
             }
 
             /**
              * Plugin public views directory
              */
             if ( ! defined( 'WPS_PUBLIC_VIEWS_PATH' ) ) {
-                define( 'WPS_PUBLIC_VIEWS_PATH', trailingslashit( WPS_PATH . 'views/public' ) );
+                define( 'WPS_PUBLIC_VIEWS_PATH', trailingslashit( 'views/public' ) );
             }
 
             /**
@@ -124,6 +124,13 @@ if ( ! class_exists( 'Constants' ) ) {
              */
             if ( ! defined( 'WPS_CONFIGS_PATH' ) ) {
                 define( 'WPS_CONFIGS_PATH', trailingslashit( WPS_PATH . 'configs' ) );
+            }
+
+            /**
+             * Default time zone id
+             */
+            if ( ! defined( 'WPS_TIMEZONE_ID' ) ) {
+                define( 'WPS_TIMEZONE_ID', 'Africa/Lagos' );
             }
         }
     }

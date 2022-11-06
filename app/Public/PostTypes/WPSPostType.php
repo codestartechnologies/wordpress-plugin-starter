@@ -55,7 +55,7 @@ if ( ! class_exists( 'WPSPostType' ) ) {
                 'menu_icon'             => 'dashicons-rss',
                 'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'revisions', 'post-formats', 'comments', ),
                 'has_archive'           => true,
-                'rewrite'               => array( 'slug' => 'community_news', ),
+                'rewrite'               => array( 'slug' => 'wps_posts', ),
                 'delete_with_user'      => false,
             );
         }

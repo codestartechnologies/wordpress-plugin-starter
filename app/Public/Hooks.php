@@ -53,6 +53,7 @@ if ( ! class_exists( 'Hooks' ) ) {
         public function register_add_filter() : void
         {
             add_filter( 'show_admin_bar', array( $this, 'filter_show_admin_bar' ) );
+            add_filter( 'the_content', array( $this, 'filter_the_content' ) );
         }
 
         /**
@@ -88,9 +89,11 @@ if ( ! class_exists( 'Hooks' ) ) {
 
                     $query->set( 'tax_query', $tax_array );
 
-                    if ( isset( $_GET['author'] ) && ! empty( $_GET['author'] ) ) {
+                    $author = $_GET['author'] ?? null;
+
+                    if ( ! empty( $author ) ) {
                         $query->set( 'meta_key', 'wps_post_author_name' );
-                        $query->set( 'meta_value', sanitize_text_field( $_GET['date'] ) );
+                        $query->set( 'meta_value', sanitize_text_field( $author ) );
                         $query->set( 'meta_compare', '=' );
                     }
 
@@ -123,5 +126,20 @@ if ( ! class_exists( 'Hooks' ) ) {
             $check = ( current_user_can( 'manage_options' ) || current_user_can( 'administrator' ) );
             return ( $check ) ? $show_admin_bar : false;
         }
+
+        /**
+         * "the_content" filter hook callback
+         *
+         * Filters the post content.
+         *
+         * @param string $content Content of the current post.
+         * @return string Content of the current post.
+         */
+        public function filter_the_content( string $content ) : string {
+            $ajax_button = __( '<p><br /><button data-id="wps_public_ajax_btn" style="padding: 9px;background-color: teal;color: #fff;cursor: pointer;border: 0;">Click to make an AJAX request!</button><b>You must be logged out to test this functionality</b></p><br />', 'wps' );
+            $content .= $ajax_button;
+        	return $content;
+        }
+
     }
 }

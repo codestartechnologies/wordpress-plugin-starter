@@ -64,7 +64,7 @@ if ( ! class_exists( 'WPSShortcode' ) ) {
         }
 
         /**
-         * Method to display the contents of the shortcode
+         * Method to display the contents of the shortcode. [wps_shortcode type=""]
          *
          * @return string
          */

@@ -47,10 +47,15 @@ if ( ! trait_exists( 'Logger' ) ) {
                 $type = 'error';
             }
 
-            if ( defined( 'ROME_PLUGIN_LOGS' ) ) {
+            if ( defined( 'WPS_LOGS_PATH' ) ) {
+                $timezone_id = wps_config( 'date.timezone_id' ) ?? WPS_TIMEZONE_ID;
+                date_default_timezone_set( $timezone_id );
                 $message = sprintf( '[%1$s][%2$s][%3$s] %4$s', date( 'Y-m-d H:i:s' ), $type, $file, $message );
                 $log_file = $this->get_log_file()[ $type ];
-                error_log( $message . PHP_EOL, 3, WPS_LOGS_PATH . $log_file );
+
+                if ( ! error_log( $message . PHP_EOL, 3, WPS_LOGS_PATH . $log_file ) ) {
+                    $this->write_log( $message . PHP_EOL, WPS_LOGS_PATH . $log_file );
+                }
             }
         }
 
@@ -70,6 +75,20 @@ if ( ! trait_exists( 'Logger' ) ) {
                 'info'      => 'info.log',
                 'debug'     => 'debug.log',
             );
+        }
+
+        /**
+         * Fallback logger method
+         *
+         * @param string $message
+         * @param string $path
+         * @return void
+         */
+        private function write_log( string $message, string $path ) : void
+        {
+            $resource = fopen( $path, 'a' );
+            fwrite( $resource, $message );
+            fclose( $resource );
         }
     }
 }

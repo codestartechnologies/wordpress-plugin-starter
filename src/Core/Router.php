@@ -79,7 +79,12 @@ if ( ! class_exists( 'Router' ) ) {
          */
         public function register_add_action() : void
         {
-            add_action( 'wp_after_admin_bar_render', array( $this, 'handle_routes' ) );
+            /**
+             * Fires once all query variables for the current request have been parsed.
+             *
+             * @param \WP $wp Current WordPress environment instance (passed by reference).
+             */
+            add_action( 'parse_request',  array( $this, 'handle_routes' )  );
         }
 
         /**
@@ -99,11 +104,12 @@ if ( ! class_exists( 'Router' ) ) {
          *
          * Loads view for a registered route
          *
+         * @final
          * @access public
          * @return void
          * @since 1.0.0
          */
-        public function handle_routes() : void
+        final public function handle_routes() : void
         {
             if ( $this->route_exists() ) {
                 $route_handler = $this->get_route_handler( $this->get_current_route() );
@@ -164,10 +170,10 @@ if ( ! class_exists( 'Router' ) ) {
          *
          * @access private
          * @param string $route_key
-         * @return string
+         * @return array
          * @since 1.0.0
          */
-        private function get_route_handler( string $route_key ) : string
+        private function get_route_handler( string $route_key ) : array
         {
             return $this->routes[ $route_key ];
         }
@@ -175,12 +181,13 @@ if ( ! class_exists( 'Router' ) ) {
         /**
          * Filters the document title.
          *
+         * @final
          * @access public
          * @param string $title Document title.
          * @return string Document title.
          * @since 1.0.0
          */
-        public function set_page_title ( string $title ) : string
+        final public function set_page_title ( string $title ) : string
         {
             if ( $this->route_exists() ) {
                 $route_handler = $this->get_route_handler( $this->get_current_route() );

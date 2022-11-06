@@ -51,6 +51,10 @@ if ( ! class_exists( 'WPSSetting' ) ) {
         /**
          * Arrays of arguements for registering the settings associated with the section.
          *
+         * Settings are saved as arrays. `$setting_id[ $setting_field_id ] = value;`
+         *
+         * To get a setting, use the format: `get_option( $setting_id )[ $setting_field_id ]`
+         *
          * @return array
          */
         public function get_settings() : array
@@ -105,7 +109,7 @@ if ( ! class_exists( 'WPSSetting' ) ) {
          */
         public function author_setting_update_cb( $old_value, $value, string $option ) : void
         {
-            $message = $old_value . ' was updated to ' . $value;
+            $message = $old_value['wps_author_name_field'] . ' was updated to ' . $value['wps_author_name_field'];
             $this->log( __FILE__, sprintf( esc_html__( '%s', 'wps' ), $message ), 'info' );
         }
 
@@ -115,7 +119,7 @@ if ( ! class_exists( 'WPSSetting' ) ) {
          * @param array $args   An array of arguements passed to add_settings_field()
          * @return void
          */
-        public function field_license_key( array $args ) : void
+        public function wps_author_name_field_cb( array $args ) : void
         {
             $this->load_view( 'settings.wps-setting', $args );
         }

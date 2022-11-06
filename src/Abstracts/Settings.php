@@ -135,11 +135,13 @@ if ( ! class_exists( 'Settings' ) ) {
          */
         private function init_settings() : void
         {
+            $page = $this->get_section()['page'] ?? null;
+
             if ( ! empty( $this->get_settings() ) ) {
                 foreach ( $this->get_settings() as $setting_key => $setting ) {
                     $args = wp_parse_args( $setting['args'], $this->default_args_for_register_setting() );
                     register_setting(
-                        $this->section['page'],
+                        $page,
                         $setting['option_name'],
                         $args
                     );
@@ -156,18 +158,22 @@ if ( ! class_exists( 'Settings' ) ) {
          */
         private function init_fields() : void
         {
+            $section = $this->get_section();
+            $settings = $this->get_settings();
+
             if ( ! empty( $this->get_fields() ) ) {
                 foreach ( $this->get_fields() as $field ) {
+                    $setting = 
                     $args = array(
                         'label_for'     => $field['id'],
-                        'option_name'   => $this->settings[ $field['setting_key'] ]['option_name'],
+                        'option_name'   => $settings[ $field['setting_key'] ]['option_name'],
                     );
                     add_settings_field(
                         $field['id'],
                         $field['title'],
                         $this->get_valid_callback( array( $this, $field['callback'] ) ),
-                        $this->section['page'],
-                        $this->section['id'],
+                        $section['page'],
+                        $section['id'],
                         $args
                     );
                 }
@@ -204,6 +210,10 @@ if ( ! class_exists( 'Settings' ) ) {
 
         /**
          * Arrays of arguements for registering the settings associated with the section.
+         *
+         * Settings are saved as arrays. `$setting_id[ $setting_field_id ] = value;`
+         *
+         * To get a setting, use the format: `get_option( $setting_id )[ $setting_field_id ]`
          *
          * @abstract
          * @access public

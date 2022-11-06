@@ -115,7 +115,7 @@ if ( ! class_exists( 'PostColumns' ) ) {
          */
         final public function manage_posts_columns( array $post_columns ) : array
         {
-            $post_columns[ $this->column ] = $this->column_title;
+            $post_columns[ $this->column_key ] = $this->column_title;
             return $post_columns;
         }
 
@@ -132,7 +132,7 @@ if ( ! class_exists( 'PostColumns' ) ) {
          */
         final public function manage_posts_custom_column( string $column_name, int $post_id ) : void
         {
-            if ( $column_name === $this->column ) {
+            if ( $column_name === $this->column_key ) {
                 $meta_value = get_post_meta( $post_id, $this->meta_key, $this->is_single_key );
                 $this->load_view( $this->view, array(
                     'post_id'       => $post_id,

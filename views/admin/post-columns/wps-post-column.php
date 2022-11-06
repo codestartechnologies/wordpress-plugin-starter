@@ -7,4 +7,5 @@
 
 ?>
 
-<small> <?php echo $meta_value['heading'] ?? null; ?> </small> <b>-</b> <a href="<?php echo admin_url( 'posts-new.php?post_type=&id=' ); ?>">Edit</a>
+<small> <?php echo $meta_value['heading'] ?? null; ?> </small> <b>-</b>
+<a href="<?php echo admin_url( 'post.php?post=' . $post_id . '&action=edit' ); ?>">Edit</a>

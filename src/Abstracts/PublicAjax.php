@@ -105,7 +105,7 @@ if ( ! class_exists( 'PublicAjax' ) ) {
         final public function register_add_action(): void
         {
             add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-            add_action( "wp_ajax_nopriv_{$this->action}", array( $this, 'handle_public_ajax_request' ) );
+            add_action( "wp_ajax_nopriv_{$this->ajax_action}", array( $this, 'handle_public_ajax_request' ) );
         }
 
         /**

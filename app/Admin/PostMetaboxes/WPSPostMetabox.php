@@ -37,7 +37,7 @@ if ( ! class_exists( 'WPSPostMetabox' ) ) {
             $this->id = 'wps_post_metabox';
             $this->title = esc_html__( 'WPS Post Metabox', 'wps' );
             $this->screens = array( 'wps_post', );
-            $this->context = 'normal';
+            $this->context = 'side';
             $this->priority = 'high';
             $this->meta_key = 'wps_post_text';
             $this->is_single_key = true;

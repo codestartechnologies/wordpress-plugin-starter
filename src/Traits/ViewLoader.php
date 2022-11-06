@@ -38,40 +38,76 @@ if ( ! trait_exists( 'ViewLoader' ) ) {
          * @param array $params     Parameters passed to the view. Default is an empty array
          * @param string $type      The directory to search for the view. Can be either "admin" or "public". Default is admin
          * @return void
+         * @since 1.0.0
          */
         public function load_view( string $view, array $params = array(), string $type = 'admin' ) : void
         {
-            $view = str_replace( '.', '/', $view );
-            $base_path = null;
-
             if ( in_array( $type, array( 'admin', 'public' ), true ) ) {
-                $base_path = 'admin' === $type ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
-                $full_path = $base_path . $view . '.php';
-
-                if ( is_readable( $full_path ) ) {
-
-                    if ( ! empty( $params ) ) {
-                        extract( $params );
-                    }
-
-                    require_once $full_path;
-                } else {
-                    $this->view_not_found_message( $full_path );
-                }
+                $base_path = WPS_PATH;
+                $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
+                $this->load( $base_path, $view, $params );
             } else {
                 $this->invalid_view_type_message( $type );
             }
         }
 
         /**
-         * Prints error message for views loaded with an invalid type parameter.
+         * Include a core view in the page
          *
          * @access public
+         * @param string $view      The relative path to the view file. Paths are separated using dots (.)
+         * @param array $params     Parameters passed to the view. Default is an empty array
+         * @param string $type      The directory to search for the view. Can be either "admin" or "public". Default is admin
+         * @return void
+         * @since 1.0.0
+         */
+        public function load_core_view( string $view, array $params = array(), string $type = 'admin' ) : void
+        {
+            if ( in_array( $type, array( 'admin', 'public' ), true ) ) {
+                $base_path = WPS_PATH . 'src/';
+                $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
+                $this->load( $base_path, $view, $params );
+            } else {
+                $this->invalid_view_type_message( $type );
+            }
+        }
+
+        /**
+         * Method to load the view
+         *
+         * @access private
+         * @param string $base_path     The base path to the view. Default is null
+         * @param string $view          The relative path to the view file. Paths are separated using dots (.)
+         * @param array $params         Parameters passed to the view. Default is an empty array
+         * @return void
+         * @since 1.0.0
+         */
+        private function load( string $base_path = null, string $view, array $params = array() ) : void
+        {
+            $view = str_replace( '.', '/', $view );
+            $full_path = $base_path . $view . '.php';
+
+            if ( is_readable( $full_path ) ) {
+
+                if ( ! empty( $params ) ) {
+                    extract( $params );
+                }
+
+                require_once $full_path;
+            } else {
+                $this->view_not_found_message( $full_path );
+            }
+        }
+
+        /**
+         * Prints error message for views loaded with an invalid type parameter.
+         *
+         * @access private
          * @param string $type  The view type
          * @return void
          * @since 1.0.0
          */
-        public function invalid_view_type_message( $type ) : void
+        private function invalid_view_type_message( $type ) : void
         {
             $markup = array_filter( ( array ) wps_config( 'views.error_messages' ) );
             $markup = wp_parse_args( ( array ) $markup, array(
@@ -87,12 +123,12 @@ if ( ! trait_exists( 'ViewLoader' ) ) {
         /**
          * Prints error message for non existing views.
          *
-         * @access public
+         * @access private
          * @param string $type  Path to the view file
          * @return void
          * @since 1.0.0
          */
-        public function view_not_found_message( $file_path ) : void
+        private function view_not_found_message( $file_path ) : void
         {
             $markup = array_filter( ( array ) wps_config( 'views.error_messages' ) );
             $markup = wp_parse_args( ( array ) $markup, array(

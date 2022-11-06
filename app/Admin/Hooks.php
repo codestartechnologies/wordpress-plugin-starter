@@ -99,7 +99,7 @@ if ( ! class_exists( 'Hooks' ) ) {
          */
         public function action_init() : void {
             add_post_type_support( 'wps_post', 'page-attributes' );
-            remove_post_type_support( 'page', 'thumbnails' );
+            remove_post_type_support( 'page', 'thumbnail' );
             remove_post_type_support( 'page', 'comments' );
         }
     }

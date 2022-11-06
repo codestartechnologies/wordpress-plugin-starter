@@ -45,7 +45,7 @@ if ( ! class_exists( 'WPSAdminNotice' ) ) {
         public function view_args() : array
         {
             return array(
-                'message'   => esc_html__( 'Thansk for using WordPress Plugin Starter!', 'wps' ),
+                'message'   => esc_html__( 'Thanks for using WordPress Plugin Starter!', 'wps' ),
             );
         }
     }

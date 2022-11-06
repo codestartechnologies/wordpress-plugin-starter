@@ -38,7 +38,7 @@ if ( ! class_exists( 'WPSPostColumn' ) ) {
             $this->meta_key         = 'wps_post_text';
             $this->is_single_key    = true;
             $this->column_key       = 'wps_post_text';
-            $this->column_title     = esc_html__( 'Extra Content: Heading', 'wps' );
+            $this->column_title     = esc_html__( 'Custom Meta - Heading:', 'wps' );
             $this->view             = 'post-columns.wps-post-column';
         }
     }
