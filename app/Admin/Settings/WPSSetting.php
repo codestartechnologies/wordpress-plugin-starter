@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\Settings;
+namespace WPS_Plugin\App\Admin\Settings;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\Settings;
 use Codestartechnologies\WordpressPluginStarter\Traits\Logger;

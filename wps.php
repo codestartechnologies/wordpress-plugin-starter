@@ -1,10 +1,10 @@
 <?php
 
-use App\Admin\Hooks as AdminHooks;
-use App\Bindings;
-use App\Hooks;
-use App\Public\Hooks as PublicHooks;
-use App\WPSConstants;
+use WPS_Plugin\App\Admin\Hooks as AdminHooks;
+use WPS_Plugin\App\Bindings;
+use WPS_Plugin\App\Hooks;
+use WPS_Plugin\App\Public\Hooks as PublicHooks;
+use WPS_Plugin\App\WPSConstants;
 use Codestartechnologies\WordpressPluginStarter\Core\Activator;
 use Codestartechnologies\WordpressPluginStarter\Core\Bootstrap;
 use Codestartechnologies\WordpressPluginStarter\Core\Constants;
@@ -68,6 +68,8 @@ final class WPSPlugin {
     private function __construct()
     {
         require_once trailingslashit( plugin_dir_path( WPS_FILE ) ) . 'vendor/autoload.php';
+
+        require_once trailingslashit( plugin_dir_path( WPS_FILE ) ) . 'autoload.php';
 
         Constants::define_core_constants();
 

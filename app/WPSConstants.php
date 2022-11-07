@@ -9,7 +9,7 @@
  * @since      1.0.0
  */
 
-namespace App;
+namespace WPS_Plugin\App;
 
 /**
  * Prevent direct access to this file.

@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\TaxonomyFormFields;
+namespace WPS_Plugin\App\Admin\TaxonomyFormFields;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\TaxonomyFormFields;
 

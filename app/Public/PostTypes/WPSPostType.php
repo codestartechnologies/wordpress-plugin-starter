@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Public\PostTypes;
+namespace WPS_Plugin\App\Public\PostTypes;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\PostTypes;
 

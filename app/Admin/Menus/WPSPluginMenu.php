@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\Menus;
+namespace WPS_Plugin\App\Admin\Menus;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\PluginMenus;
 

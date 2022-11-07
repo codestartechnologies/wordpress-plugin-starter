@@ -15,8 +15,7 @@
     "license": "AGPL-3.0-or-later",
     "autoload": {
         "psr-4": {
-            "Codestartechnologies\\WordpressPluginStarter\\": "src/",
-            "App\\": "app/"
+            "Codestartechnologies\\WordpressPluginStarter\\": "src/"
         },
         "files": [
             "src/functions.php"

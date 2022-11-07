@@ -9,23 +9,23 @@
  * @since      1.0.0
  */
 
-namespace App;
+namespace WPS_Plugin\App;
 
-use App\Admin\AdminNotices\WPSAdminNotice;
-use App\Admin\AjaxRequests\WPSAdminAjaxRequest;
-use App\Admin\Menus\WPSMenu;
-use App\Admin\Menus\WPSPluginMenu;
-use App\Admin\Menus\WPSSettingMenu;
-use App\Admin\Menus\WPSSubMenu;
-use App\Admin\NavMenuMetaboxes\WPSNavMenuMetabox;
-use App\Admin\PostColumns\WPSPostColumn;
-use App\Admin\PostMetaboxes\WPSPostMetabox;
-use App\Admin\Settings\WPSSetting;
-use App\Admin\TaxonomyFormFields\WPSTaxonomyFormField;
-use App\Public\AjaxRequests\WPSPublicAjaxRequest;
-use App\Public\PostTypes\WPSPostType;
-use App\Public\Shortcodes\WPSShortcode;
-use App\Public\Taxonomies\WPSTaxonomy;
+use WPS_Plugin\App\Admin\AdminNotices\WPSAdminNotice;
+use WPS_Plugin\App\Admin\AjaxRequests\WPSAdminAjaxRequest;
+use WPS_Plugin\App\Admin\Menus\WPSMenu;
+use WPS_Plugin\App\Admin\Menus\WPSPluginMenu;
+use WPS_Plugin\App\Admin\Menus\WPSSettingMenu;
+use WPS_Plugin\App\Admin\Menus\WPSSubMenu;
+use WPS_Plugin\App\Admin\NavMenuMetaboxes\WPSNavMenuMetabox;
+use WPS_Plugin\App\Admin\PostColumns\WPSPostColumn;
+use WPS_Plugin\App\Admin\PostMetaboxes\WPSPostMetabox;
+use WPS_Plugin\App\Admin\Settings\WPSSetting;
+use WPS_Plugin\App\Admin\TaxonomyFormFields\WPSTaxonomyFormField;
+use WPS_Plugin\App\Public\AjaxRequests\WPSPublicAjaxRequest;
+use WPS_Plugin\App\Public\PostTypes\WPSPostType;
+use WPS_Plugin\App\Public\Shortcodes\WPSShortcode;
+use WPS_Plugin\App\Public\Taxonomies\WPSTaxonomy;
 
 /**
  * Prevent direct access to this file.

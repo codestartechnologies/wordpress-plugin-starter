@@ -13,9 +13,9 @@
 
 namespace Codestartechnologies\WordpressPluginStarter\Core;
 
-use App\Admin\Hooks as AdminHooks;
-use App\Hooks;
-use App\Public\Hooks as PublicHooks;
+use WPS_Plugin\App\Admin\Hooks as AdminHooks;
+use WPS_Plugin\App\Hooks;
+use WPS_Plugin\App\Public\Hooks as PublicHooks;
 use Codestartechnologies\WordpressPluginStarter\Abstracts\AdminAjax;
 use Codestartechnologies\WordpressPluginStarter\Abstracts\AdminNotices;
 use Codestartechnologies\WordpressPluginStarter\Abstracts\Menus;

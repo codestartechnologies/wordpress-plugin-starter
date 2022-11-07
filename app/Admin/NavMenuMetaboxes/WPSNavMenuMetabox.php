@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\NavMenuMetaboxes;
+namespace WPS_Plugin\App\Admin\NavMenuMetaboxes;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\NavMenuMetaboxes;
 

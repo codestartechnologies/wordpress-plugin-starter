@@ -15,10 +15,6 @@ class ComposerStaticInit2cf481c27b38d1b07d91fe1ea0759e4b
         array (
             'Codestartechnologies\\WordpressPluginStarter\\' => 44,
         ),
-        'A' => 
-        array (
-            'App\\' => 4,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -26,33 +22,9 @@ class ComposerStaticInit2cf481c27b38d1b07d91fe1ea0759e4b
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/app',
-        ),
     );
 
     public static $classMap = array (
-        'App\\Admin\\AdminNotices\\WPSAdminNotice' => __DIR__ . '/../..' . '/app/Admin/AdminNotices/WPSAdminNotice.php',
-        'App\\Admin\\AjaxRequests\\WPSAdminAjaxRequest' => __DIR__ . '/../..' . '/app/Admin/AjaxRequests/WPSAdminAjaxRequest.php',
-        'App\\Admin\\Hooks' => __DIR__ . '/../..' . '/app/Admin/Hooks.php',
-        'App\\Admin\\Menus\\WPSMenu' => __DIR__ . '/../..' . '/app/Admin/Menus/WPSMenu.php',
-        'App\\Admin\\Menus\\WPSPluginMenu' => __DIR__ . '/../..' . '/app/Admin/Menus/WPSPluginMenu.php',
-        'App\\Admin\\Menus\\WPSSettingMenu' => __DIR__ . '/../..' . '/app/Admin/Menus/WPSSettingMenu.php',
-        'App\\Admin\\Menus\\WPSSubMenu' => __DIR__ . '/../..' . '/app/Admin/Menus/WPSSubMenu.php',
-        'App\\Admin\\NavMenuMetaboxes\\WPSNavMenuMetabox' => __DIR__ . '/../..' . '/app/Admin/NavMenuMetaboxes/WPSNavMenuMetabox.php',
-        'App\\Admin\\PostColumns\\WPSPostColumn' => __DIR__ . '/../..' . '/app/Admin/PostColumns/WPSPostColumn.php',
-        'App\\Admin\\PostMetaboxes\\WPSPostMetabox' => __DIR__ . '/../..' . '/app/Admin/PostMetaboxes/WPSPostMetabox.php',
-        'App\\Admin\\Settings\\WPSSetting' => __DIR__ . '/../..' . '/app/Admin/Settings/WPSSetting.php',
-        'App\\Admin\\TaxonomyFormFields\\WPSTaxonomyFormField' => __DIR__ . '/../..' . '/app/Admin/TaxonomyFormFields/WPSTaxonomyFormField.php',
-        'App\\Bindings' => __DIR__ . '/../..' . '/app/Bindings.php',
-        'App\\Hooks' => __DIR__ . '/../..' . '/app/Hooks.php',
-        'App\\Public\\AjaxRequests\\WPSPublicAjaxRequest' => __DIR__ . '/../..' . '/app/Public/AjaxRequests/WPSPublicAjaxRequest.php',
-        'App\\Public\\Hooks' => __DIR__ . '/../..' . '/app/Public/Hooks.php',
-        'App\\Public\\PostTypes\\WPSPostType' => __DIR__ . '/../..' . '/app/Public/PostTypes/WPSPostType.php',
-        'App\\Public\\Shortcodes\\WPSShortcode' => __DIR__ . '/../..' . '/app/Public/Shortcodes/WPSShortcode.php',
-        'App\\Public\\Taxonomies\\WPSTaxonomy' => __DIR__ . '/../..' . '/app/Public/Taxonomies/WPSTaxonomy.php',
-        'App\\WPSConstants' => __DIR__ . '/../..' . '/app/WPSConstants.php',
         'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\AdminAjax' => __DIR__ . '/../..' . '/src/Abstracts/AdminAjax.php',
         'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\AdminNotices' => __DIR__ . '/../..' . '/src/Abstracts/AdminNotices.php',
         'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\Menus' => __DIR__ . '/../..' . '/src/Abstracts/Menus.php',

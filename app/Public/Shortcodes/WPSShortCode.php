@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Public\Shortcodes;
+namespace WPS_Plugin\App\Public\Shortcodes;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\Shortcodes;
 use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;

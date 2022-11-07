@@ -11,7 +11,7 @@
  * @since      1.0.0
  */
 
-namespace App;
+namespace WPS_Plugin\App;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\ActionHook;
 use Codestartechnologies\WordpressPluginStarter\Interfaces\FilterHook;

@@ -7,5 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Codestartechnologies\\WordpressPluginStarter\\' => array($baseDir . '/src'),
-    'App\\' => array($baseDir . '/app'),
 );

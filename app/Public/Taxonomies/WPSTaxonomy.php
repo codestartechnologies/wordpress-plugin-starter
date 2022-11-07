@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Public\Taxonomies;
+namespace WPS_Plugin\App\Public\Taxonomies;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\Taxonomies;
 

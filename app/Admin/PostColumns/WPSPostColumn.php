@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\PostColumns;
+namespace WPS_Plugin\App\Admin\PostColumns;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\PostColumns;
 

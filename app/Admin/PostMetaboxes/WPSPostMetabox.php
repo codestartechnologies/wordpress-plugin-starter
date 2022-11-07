@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\PostMetaboxes;
+namespace WPS_Plugin\App\Admin\PostMetaboxes;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\PostMetaboxes;
 

@@ -9,7 +9,7 @@
  * @since       1.0.0
  */
 
-namespace App\Admin\AjaxRequests;
+namespace WPS_Plugin\App\Admin\AjaxRequests;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\AdminAjax;
 
