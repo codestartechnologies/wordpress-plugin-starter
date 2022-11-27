@@ -37,15 +37,16 @@ if ( ! trait_exists( 'ViewLoader' ) ) {
          * @param string $view      The relative path to the view file. Paths are separated using dots (.)
          * @param array $params     Parameters passed to the view. Default is an empty array
          * @param string $type      The directory to search for the view. Can be either "admin" or "public". Default is admin
+         * @param bool $once        Whether to include the view only once. Default true
          * @return void
          * @since 1.0.0
          */
-        public function load_view( string $view, array $params = array(), string $type = 'admin' ) : void
+        public function load_view( string $view, array $params = array(), string $type = 'admin', bool $once = true ) : void
         {
             if ( in_array( $type, array( 'admin', 'public' ), true ) ) {
                 $base_path = WPS_PATH;
                 $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
-                $this->load( $base_path, $view, $params );
+                $this->load( $base_path, $view, $params, $once );
             } else {
                 $this->invalid_view_type_message( $type );
             }
@@ -58,15 +59,16 @@ if ( ! trait_exists( 'ViewLoader' ) ) {
          * @param string $view      The relative path to the view file. Paths are separated using dots (.)
          * @param array $params     Parameters passed to the view. Default is an empty array
          * @param string $type      The directory to search for the view. Can be either "admin" or "public". Default is admin
+         * @param bool $once        Whether to include the view only once. Default true
          * @return void
          * @since 1.0.0
          */
-        public function load_core_view( string $view, array $params = array(), string $type = 'admin' ) : void
+        public function load_core_view( string $view, array $params = array(), string $type = 'admin', bool $once = true ) : void
         {
             if ( in_array( $type, array( 'admin', 'public' ), true ) ) {
                 $base_path = WPS_PATH . 'src/';
                 $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
-                $this->load( $base_path, $view, $params );
+                $this->load( $base_path, $view, $params, $once );
             } else {
                 $this->invalid_view_type_message( $type );
             }
@@ -79,10 +81,11 @@ if ( ! trait_exists( 'ViewLoader' ) ) {
          * @param string $base_path     The base path to the view. Default is null
          * @param string $view          The relative path to the view file. Paths are separated using dots (.)
          * @param array $params         Parameters passed to the view. Default is an empty array
+         * @param bool $once            Whether to include the view only once. Default true
          * @return void
          * @since 1.0.0
          */
-        private function load( string $base_path = null, string $view, array $params = array() ) : void
+        private function load( string $base_path = null, string $view, array $params = array(), bool $once = true ) : void
         {
             $view = str_replace( '.', '/', $view );
             $full_path = $base_path . $view . '.php';
@@ -93,7 +96,11 @@ if ( ! trait_exists( 'ViewLoader' ) ) {
                     extract( $params );
                 }
 
-                require_once $full_path;
+                if ( $once ) {
+                    require_once $full_path;
+                } else {
+                    require $full_path;
+                }
             } else {
                 $this->view_not_found_message( $full_path );
             }

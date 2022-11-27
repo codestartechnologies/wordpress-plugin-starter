@@ -3,7 +3,7 @@
 spl_autoload_register( 'wps_autoloader' );
 
 /**
- * Function to autoload classes starting with WTS_Theme namespace
+ * Function to autoload classes starting with WPS_Plugin namespace
  *
  * @param string $class
  * @return void
