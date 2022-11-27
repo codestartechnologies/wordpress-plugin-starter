@@ -1,8 +1,8 @@
 <?php
 /**
- * WPSConstants class file.
+ * Constants class file.
  *
- * This file contains WPSConstants class which defines needed constants that will be used in your plugin development.
+ * This file contains Constants class which defines needed constants that will be used in your plugin development.
  *
  * @package    WordpressPluginStarter
  * @author     Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -18,18 +18,18 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'WPSConstants' ) ) {
+if ( ! class_exists( 'Constants' ) ) {
     /**
-     * Class WPSConstants
+     * Class Constants
      *
      * This class defines needed constants that will be used in your plugin development.
      *
      * @package WordpressPluginStarter
      * @author Chijindu Nzeako <chijindunzeako517@gmail.com>
      */
-    final class WPSConstants {
+    final class Constants {
         /**
-         * Define core constants.
+         * Define app constants.
          *
          * This methods defines custom constants that you will need to develop your plugin.
          *
@@ -38,14 +38,18 @@ if ( ! class_exists( 'WPSConstants' ) ) {
         public static function define_constants() : void
         {
             /**
-             * Plugin name
+             * Plugin Name
+             *
+             * You can modifiy this definition to match your plugin name.
              */
             if ( ! defined( 'WPS_PLUGIN_NAME' ) ) {
-                define( 'WPS_PLUGIN_NAME', 'Custom Plugin Name' );
+                define( 'WPS_PLUGIN_NAME', 'WPS Plugin' );
             }
 
             /**
-             * Plugin version
+             * Plugin Version
+             *
+             * You can modifiy this definition to match your plugin version.
              */
             if ( ! defined( 'WPS_PLUGIN_VERSION' ) ) {
                 define( 'WPS_PLUGIN_VERSION', '1.0.0' );

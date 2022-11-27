@@ -4,7 +4,7 @@ use WPS_Plugin\App\Admin\Hooks as AdminHooks;
 use WPS_Plugin\App\Bindings;
 use WPS_Plugin\App\Hooks;
 use WPS_Plugin\App\Public\Hooks as PublicHooks;
-use WPS_Plugin\App\WPSConstants;
+use WPS_Plugin\App\Constants as AppConstants;
 use Codestartechnologies\WordpressPluginStarter\Core\Activator;
 use Codestartechnologies\WordpressPluginStarter\Core\Bootstrap;
 use Codestartechnologies\WordpressPluginStarter\Core\Constants;
@@ -66,7 +66,7 @@ final class WPSPlugin {
 
         Constants::define_core_constants();
 
-        WPSConstants::define_constants();
+        AppConstants::define_constants();
 
         register_activation_hook( WPS_FILE, function () {
             $this->activate( new Activator() );
