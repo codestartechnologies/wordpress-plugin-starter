@@ -38,6 +38,7 @@ if ( ! class_exists( 'WPSShortcode' ) ) {
          */
         public function __construct()
         {
+            $this->type = 'advanced';
             $this->tag = 'wps_shortcode';
         }
 

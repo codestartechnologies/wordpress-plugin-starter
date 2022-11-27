@@ -41,6 +41,17 @@ if ( ! class_exists( 'Shortcodes' ) ) {
         protected string $tag;
 
         /**
+         * Shortcode Type
+         *
+         * Can be **basic** or **advanced**. **advanced** is used for shortcodes with parameters. Default advanced
+         *
+         * @access protected
+         * @var string
+         * @since 1.0.0
+         */
+        protected string $type = 'advanced';
+
+        /**
          * Register add_action() and remove_action().
          *
          * @final
@@ -67,7 +78,14 @@ if ( ! class_exists( 'Shortcodes' ) ) {
          */
         final public function add_code() : void
         {
-            add_shortcode( $this->tag, array( $this, 'shortcode_cb' ) );
+            switch ( $this->type ) {
+                case 'basic':
+                    add_shortcode( $this->tag, array( $this, 'simple_shortcode_cb' ) );
+                    break;
+                case 'advanced':
+                    add_shortcode( $this->tag, array( $this, 'shortcode_cb' ) );
+                    break;
+            }
         }
 
         /**
@@ -87,6 +105,21 @@ if ( ! class_exists( 'Shortcodes' ) ) {
             $shortcode_attributes = shortcode_atts( $this->default_attributes(), $atts, $tag );
             ob_start();
             $this->display( $shortcode_attributes, $content, $tag );
+            return ob_get_clean();
+        }
+
+        /**
+         * Shortcode callback for shortcode without attributes
+         *
+         * @final
+         * @access public
+         * @return string
+         * @since 1.0.0
+         */
+        final public function simple_shortcode_cb() : string
+        {
+            ob_start();
+            $this->display( array(), '', '' );
             return ob_get_clean();
         }
 

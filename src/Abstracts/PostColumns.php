@@ -138,7 +138,7 @@ if ( ! class_exists( 'PostColumns' ) ) {
                     'post_id'       => $post_id,
                     'meta_key'      => $this->meta_key,
                     'meta_value'    => $meta_value,
-                ) );
+                ), 'admin', false );
             }
         }
     }

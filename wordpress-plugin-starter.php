@@ -7,7 +7,7 @@ Version: 1.0.0
 Requires at least: 5.7
 Requires PHP: 8.0
 Author: Codestar Technologies
-Author URI:
+Author URI: https://codestar.com.ng
 License: AGPLv3
 License URI:
 Text Domain: wps
@@ -24,8 +24,15 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with Rome Plugin. If not, see https://www.gnu.org/licenses/gpl-3.0.html.
+You should have received a copy of the {License}
+along with {Plugin Name}. If not, see {License URI}.
 */
+
+/**
+ * The full-path and file name of the plugin file
+ */
+if ( ! defined( 'WPS_FILE' ) ) {
+    define( 'WPS_FILE', __FILE__ );
+}
 
 require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . 'wps.php';

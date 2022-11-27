@@ -21,13 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * The full-path and file name of the plugin file
- */
-if ( ! defined( 'WPS_FILE' ) ) {
-    define( 'WPS_FILE', __FILE__ );
-}
-
-/**
  * WPSPlugin Class
  *
  * This class is used to create a WordPress plugin. It is the main file of your plugin.
@@ -75,15 +68,15 @@ final class WPSPlugin {
 
         WPSConstants::define_constants();
 
-        register_activation_hook( __FILE__, function () {
+        register_activation_hook( WPS_FILE, function () {
             $this->activate( new Activator() );
         } );
 
-        register_deactivation_hook( __FILE__, function () {
+        register_deactivation_hook( WPS_FILE, function () {
             $this->deactivate( new Deactivator() );
         } );
 
-        register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
+        register_uninstall_hook( WPS_FILE, array( __CLASS__, 'uninstall' ) );
     }
 
     /**
