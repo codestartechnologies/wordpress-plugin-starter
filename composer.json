@@ -18,7 +18,8 @@
             "Codestartechnologies\\WordpressPluginStarter\\": "src/"
         },
         "files": [
-            "src/functions.php"
+            "src/functions.php",
+            "functions.php"
         ]
     },
     "authors": [
