@@ -24,6 +24,7 @@ use WPS_Plugin\App\Admin\Settings\WPSSetting;
 use WPS_Plugin\App\Admin\TaxonomyFormFields\WPSTaxonomyFormField;
 use WPS_Plugin\App\Public\AjaxRequests\WPSPublicAjaxRequest;
 use WPS_Plugin\App\Public\PostTypes\WPSPostType;
+use WPS_Plugin\App\Public\Shortcodes\WPSBasicShortcode;
 use WPS_Plugin\App\Public\Shortcodes\WPSShortcode;
 use WPS_Plugin\App\Public\Taxonomies\WPSTaxonomy;
 
@@ -126,6 +127,7 @@ if ( ! class_exists( 'Bindings' ) ) {
          */
         public static array $shortcodes = array(
             WPSShortcode::class,
+            WPSBasicShortcode::class,
         );
 
         /**
