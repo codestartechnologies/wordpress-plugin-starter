@@ -1,4 +1,17 @@
 <?php
+/**
+ * Plugin Class
+ *
+ * This file contains Plugin Class which is designed using singletone design pattern.
+ *
+ * @package     WordpressPluginStarter
+ * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
+ * @link        https://github.com/codestartechnologies/wordpress-plugin-starter
+ * @license     GNU/AGPLv3
+ * @since       1.0.0
+ */
+
+namespace Codestartechnologies\WordpressPluginStarter;
 
 use WPS_Plugin\App\Admin\Hooks as AdminHooks;
 use WPS_Plugin\App\Bindings;
@@ -12,35 +25,31 @@ use Codestartechnologies\WordpressPluginStarter\Core\Deactivator;
 use Codestartechnologies\WordpressPluginStarter\Core\Router;
 use Codestartechnologies\WordpressPluginStarter\Core\Uninstaller;
 
-
-/**
- * Exit if accessed directly
- */
+// Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 /**
- * WPSPlugin Class
+ * Plugin Class
  *
  * This class is used to create a WordPress plugin. It is the main file of your plugin.
  *
  * @package WordpressPluginStarter
- * @author Chijindu Nzeako <chijindunzeako517@gmail.com>
- * @link https://codestar.com.ng
- * @license GNU/AGPLv3
- * @since 0.1.0
+ * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
+ * @since   0.1.0
  */
-final class WPSPlugin {
+final class Plugin
+{
     /**
      * The plugin instance
      *
      * @access private
      * @static
-     * @var WPSPlugin
+     * @var Plugin
      * @since 1.0.0
      */
-    private static WPSPlugin $instance;
+    private static Plugin $instance;
 
     /**
      * Object that bootstrap the core functionalities of the plugin.
@@ -52,7 +61,7 @@ final class WPSPlugin {
     private Bootstrap $bootstrap;
 
     /**
-     * WPSPlugin constructor
+     * Plugin constructor
      *
      * @access private
      * @return void
@@ -60,22 +69,29 @@ final class WPSPlugin {
      */
     private function __construct()
     {
+        // Require composer autoloader file for autoloading classes.
         require_once trailingslashit( plugin_dir_path( WPS_FILE ) ) . 'vendor/autoload.php';
 
+        // Require wordpress plugin starter autoloader file for autoloading classes.
         require_once trailingslashit( plugin_dir_path( WPS_FILE ) ) . 'autoload.php';
 
+        // Define core constants required by wordpress plugin starter.
         Constants::define_core_constants();
 
+        // Define custom constants.
         AppConstants::define_constants();
 
+        // Sets the activation hook for a plugin.
         register_activation_hook( WPS_FILE, function () {
             $this->activate( new Activator() );
         } );
 
+        // Sets the deactivation hook for a plugin.
         register_deactivation_hook( WPS_FILE, function () {
             $this->deactivate( new Deactivator() );
         } );
 
+        // Sets the uninstallation hook for a plugin.
         register_uninstall_hook( WPS_FILE, array( __CLASS__, 'uninstall' ) );
     }
 
@@ -131,10 +147,10 @@ final class WPSPlugin {
      * Creates or returns the plugin instance
      *
      * @access public
-     * @return WPSPlugin
+     * @return Plugin
      * @since 1.0.0
      */
-    public static function get_instance() : WPSPlugin
+    public static function get_instance() : Plugin
     {
         if ( ! isset( self::$instance ) ) {
             self::$instance = new self();
@@ -146,6 +162,7 @@ final class WPSPlugin {
     /**
      * Initialize classes.
      *
+     * @access private
      * @param array $classes
      * @return array
      */
@@ -197,6 +214,3 @@ final class WPSPlugin {
         $this->bootstrap->init();
     }
 }
-
-$wps_plugin = WPSPlugin::get_instance();
-$wps_plugin->run();

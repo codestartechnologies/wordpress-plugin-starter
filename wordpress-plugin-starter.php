@@ -47,9 +47,19 @@ along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.h
  */
 
 
-// The full-path and file name of the plugin file
+// Full-path to the plugin main file
+
+use Codestartechnologies\WordpressPluginStarter\Plugin;
+
 if ( ! defined( 'WPS_FILE' ) ) {
     define( 'WPS_FILE', __FILE__ );
 }
 
+// Require plugin main class file
 require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . 'wps.php';
+
+// Initialize plugin main class
+$wps_plugin = Plugin::get_instance();
+
+// Run the plugin
+$wps_plugin->run();
