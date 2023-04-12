@@ -5,18 +5,15 @@
     "keywords": [
         "wordpress",
         "wordpress plugin boilerplate",
-        "boilerplate for wordpress plugin",
-        "wordpress plugin generator",
+        "boilerplate",
+        "wordpress plugin",
         "wps",
-        "wordpress plugin starter",
+        "wordpress starter template",
         "wordpress plugin builder"
     ],
     "readme": "README.MD",
     "license": "AGPL-3.0-or-later",
     "autoload": {
-        "psr-4": {
-            "Codestartechnologies\\WordpressPluginStarter\\": "src/"
-        },
         "files": [
             "src/functions.php",
             "app/functions.php"

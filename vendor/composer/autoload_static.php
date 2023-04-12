@@ -11,58 +11,13 @@ class ComposerStaticInit2cf481c27b38d1b07d91fe1ea0759e4b
         'a0333bd381cfa2e3e585689c785fe1be' => __DIR__ . '/../..' . '/app/functions.php',
     );
 
-    public static $prefixLengthsPsr4 = array (
-        'C' => 
-        array (
-            'Codestartechnologies\\WordpressPluginStarter\\' => 44,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Codestartechnologies\\WordpressPluginStarter\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
-    );
-
     public static $classMap = array (
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\AdminAjax' => __DIR__ . '/../..' . '/src/Abstracts/AdminAjax.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\AdminNotices' => __DIR__ . '/../..' . '/src/Abstracts/AdminNotices.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\Menus' => __DIR__ . '/../..' . '/src/Abstracts/Menus.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\NavMenuMetaboxes' => __DIR__ . '/../..' . '/src/Abstracts/NavMenuMetaboxes.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\OptionsMenus' => __DIR__ . '/../..' . '/src/Abstracts/OptionsMenus.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\PluginMenus' => __DIR__ . '/../..' . '/src/Abstracts/PluginMenus.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\PostColumns' => __DIR__ . '/../..' . '/src/Abstracts/PostColumns.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\PostMetaboxes' => __DIR__ . '/../..' . '/src/Abstracts/PostMetaboxes.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\PostTypes' => __DIR__ . '/../..' . '/src/Abstracts/PostTypes.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\PublicAjax' => __DIR__ . '/../..' . '/src/Abstracts/PublicAjax.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\Settings' => __DIR__ . '/../..' . '/src/Abstracts/Settings.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\Shortcodes' => __DIR__ . '/../..' . '/src/Abstracts/Shortcodes.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\SubMenus' => __DIR__ . '/../..' . '/src/Abstracts/SubMenus.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\Taxonomies' => __DIR__ . '/../..' . '/src/Abstracts/Taxonomies.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Abstracts\\TaxonomyFormFields' => __DIR__ . '/../..' . '/src/Abstracts/TaxonomyFormFields.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Core\\Activator' => __DIR__ . '/../..' . '/src/Core/Activator.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Core\\Bootstrap' => __DIR__ . '/../..' . '/src/Core/Bootstrap.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Core\\Constants' => __DIR__ . '/../..' . '/src/Core/Constants.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Core\\Deactivator' => __DIR__ . '/../..' . '/src/Core/Deactivator.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Core\\Router' => __DIR__ . '/../..' . '/src/Core/Router.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Core\\Uninstaller' => __DIR__ . '/../..' . '/src/Core/Uninstaller.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Interfaces\\ActionHook' => __DIR__ . '/../..' . '/src/Interfaces/ActionHook.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Interfaces\\FilterHook' => __DIR__ . '/../..' . '/src/Interfaces/FilterHook.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Interfaces\\PostsColumn' => __DIR__ . '/../..' . '/src/Interfaces/PostsColumn.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Interfaces\\Routes' => __DIR__ . '/../..' . '/src/Interfaces/Routes.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Traits\\Callbacks' => __DIR__ . '/../..' . '/src/Traits/Callbacks.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Traits\\Logger' => __DIR__ . '/../..' . '/src/Traits/Logger.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Traits\\Validator' => __DIR__ . '/../..' . '/src/Traits/Validator.php',
-        'Codestartechnologies\\WordpressPluginStarter\\Traits\\ViewLoader' => __DIR__ . '/../..' . '/src/Traits/ViewLoader.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2cf481c27b38d1b07d91fe1ea0759e4b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2cf481c27b38d1b07d91fe1ea0759e4b::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit2cf481c27b38d1b07d91fe1ea0759e4b::$classMap;
 
         }, null, ClassLoader::class);
