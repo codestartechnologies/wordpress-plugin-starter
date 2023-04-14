@@ -1,3 +1,15 @@
+<?php
+/**
+ * This is a part file that is used to display view for a nav menu metabox.
+ *
+ * @package WordpressPluginStarter
+ * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
+ * @link    https://github.com/codestartechnologies/wordpress-plugin-starter
+ * @license GNU/AGPLv3
+ * @since   1.0.0
+ */
+?>
+
 <div id="<?php echo $identifier; ?>-div">
     <div id="tabs-panel-<?php echo $identifier; ?>-all" class="tabs-panel tabs-panel-active">
         <ul id="<?php echo $identifier ?>-checklist-pop" class="categorychecklist form-no-clear">

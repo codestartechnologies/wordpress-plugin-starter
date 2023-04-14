@@ -1,5 +1,17 @@
 <?php
 /**
+ * This is a part file that is used to display a view for a setting field.
+ *
+ * @package WordpressPluginStarter
+ * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
+ * @link    https://github.com/codestartechnologies/wordpress-plugin-starter
+ * @license GNU/AGPLv3
+ * @since   1.0.0
+ */
+
+/**
+ * Below are default variables that are passed to this file.
+ *
  * $option_name     - The option name. Passed to the view by default
  * $label_for       - The field id. Passed to the view by default
  *

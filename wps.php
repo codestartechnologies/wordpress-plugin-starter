@@ -165,6 +165,7 @@ final class Plugin
      * @access private
      * @param array $classes
      * @return array
+     * @since 1.0.0
      */
     private static function boot( array $classes = array() ) : array
     {

@@ -6,36 +6,34 @@
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
- * @link        https://codestar.com.ng
+ * @link        https://github.com/codestartechnologies/wordpress-plugin-starter
+ * @license     https://www.gnu.org/licenses/agpl-3.0.txt GNU/AGPLv3
  * @since       1.0.0
  */
 
 namespace Codestartechnologies\WordpressPluginStarter\Interfaces;
 
-/**
- * Prevent direct access to this file.
- */
+// Prevent direct access to this file.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! interface_exists( 'Routes' ) ) {
+/**
+ * Interface Routes
+ *
+ * Classes that generates custom routes will need to implement this interface.
+ *
+ * @package WordpressPluginStarter
+ * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
+ */
+interface Routes
+{
     /**
-     * Interface Routes
+     * Load a custom route page or view
      *
-     * Classes that generates custom routes will need to implement this interface.
-     *
-     * @package WordpressPluginStarter
-     * @author Chijindu Nzeako <chijindunzeako517@gmail.com>
+     * @access public
+     * @return void
+     * @since 1.0.0
      */
-    interface Routes {
-        /**
-         * Load a custom route page or view
-         *
-         * @access public
-         * @return void
-         * @since 1.0.0
-         */
-        public function render() : void;
-    }
+    public function render() : void;
 }

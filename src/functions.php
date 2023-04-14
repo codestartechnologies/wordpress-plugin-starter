@@ -1,10 +1,12 @@
 <?php
 /**
- * This file contains general helper functions for your plugin
+ * This file contains general helper functions for your plugin.
  *
+ * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
+ * @link        https://github.com/codestartechnologies/wordpress-plugin-starter
  * @license     https://www.gnu.org/licenses/agpl-3.0.txt GNU/AGPLv3
- * @link        https://codestar.com.ng
+ * @since       1.0.0
  */
 
 if ( ! function_exists( 'wps_is_theme_installed' ) ) {
@@ -13,6 +15,7 @@ if ( ! function_exists( 'wps_is_theme_installed' ) ) {
      *
      * @param string $theme_dir_name    The directory name of the theme
      * @return boolean
+     * @since 1.0.0
      */
     function wps_is_theme_installed( string $theme_dir_name ) : bool
     {
@@ -26,6 +29,7 @@ if ( ! function_exists( 'wps_is_theme_active' ) ) {
      *
      * @param string $theme_name    The theme name
      * @return boolean
+     * @since 1.0.0
      */
     function wps_is_theme_active( string $theme_name ) : bool
     {

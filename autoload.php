@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains functions for loading classes and files
+ * This file contains WPSAutoLoader class which registers an autoloader for classes.
  *
  * @package WordPressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -18,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * WPSAutoLoader class
+ *
+ * This class registers an autoloader for classes.
  *
  * @package WordPressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
