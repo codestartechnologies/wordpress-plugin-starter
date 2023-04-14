@@ -82,7 +82,11 @@ final class Uninstaller
     {
         if ( ! empty( self::$settings ) ) {
             foreach ( self::$settings as $setting ) {
-                $setting::delete_settings();
+                if ( ! empty( $setting->get_settings() ) ) {
+                    foreach ( $setting->get_settings() as $setting_key => $setting ) {
+                        delete_option( $setting['option_name'] );
+                    }
+                }
             }
         }
     }
@@ -98,7 +102,7 @@ final class Uninstaller
     {
         if ( ! empty( self::$post_metas ) ) {
             foreach ( self::$post_metas as $post_meta ) {
-                $post_meta::delete();
+                delete_post_meta_by_key( $post_meta->meta_key );
             }
         }
     }

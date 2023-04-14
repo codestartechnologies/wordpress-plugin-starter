@@ -42,7 +42,7 @@ abstract class Settings implements ActionHook
      * @return void
      * @since 1.0.0
      */
-    final public function register_add_action(): void
+    final public function register_add_action() : void
     {
         add_action( 'admin_init', array( $this, 'settings_page' ) );
         add_action( 'rest_api_init', array( $this, 'settings_page' ) );
@@ -61,7 +61,7 @@ abstract class Settings implements ActionHook
      */
     final public function settings_page() : void
     {
-        $this->init_section();
+        $this->init_sections();
         $this->init_settings();
         $this->init_fields();
     }
@@ -87,42 +87,25 @@ abstract class Settings implements ActionHook
     }
 
     /**
-     * Deletes settings from database.
-     *
-     * @final
-     * @static
-     * @since 1.0.0
-     * @return void
-     * @since 1.0.0
-     */
-    final public static function delete_settings() : void
-    {
-        if ( ! empty( self::get_settings() ) ) {
-            foreach ( self::get_settings() as $setting_key => $setting ) {
-                if ( get_option( $setting['option_name'] ) ) {
-                    delete_option( $setting['option_name'] );
-                }
-            }
-        }
-    }
-
-    /**
      * Registers a setting section
      *
      * @access private
      * @return void
      * @since 1.0.0
      */
-    private function init_section() : void
+    private function init_sections() : void
     {
-        $section = $this->get_section();
-        if ( ! empty( $section ) ) {
-            add_settings_section(
-                $section['id'],
-                $section['title'],
-                $this->get_valid_callback( $section['callback'] ),
-                $section['page']
-            );
+        $sections = $this->get_section();
+
+        if ( ! empty( $sections ) ) {
+            foreach ( $sections as $section_key => $section) {
+                add_settings_section(
+                    $section['id'],
+                    $section['title'],
+                    $this->get_valid_callback( $section['callback'] ),
+                    $section['page']
+                );
+            }
         }
     }
 
@@ -135,13 +118,13 @@ abstract class Settings implements ActionHook
      */
     private function init_settings() : void
     {
-        $page = $this->get_section()['page'] ?? null;
+        $settings = $this->get_settings();
 
-        if ( ! empty( $this->get_settings() ) ) {
-            foreach ( $this->get_settings() as $setting_key => $setting ) {
+        if ( ! empty( $settings ) ) {
+            foreach ( $settings as $setting_key => $setting ) {
                 $args = wp_parse_args( $setting['args'], $this->default_args_for_register_setting() );
                 register_setting(
-                    $page,
+                    $setting['page'],
                     $setting['option_name'],
                     $args
                 );
@@ -158,12 +141,12 @@ abstract class Settings implements ActionHook
      */
     private function init_fields() : void
     {
-        $section = $this->get_section();
+        $sections = $this->get_section();
         $settings = $this->get_settings();
+        $fields = $this->get_fields();
 
-        if ( ! empty( $this->get_fields() ) ) {
-            foreach ( $this->get_fields() as $field ) {
-                $setting = 
+        if ( ! empty( $fields ) ) {
+            foreach ( $fields as $field ) {
                 $args = array(
                     'label_for'     => $field['id'],
                     'option_name'   => $settings[ $field['setting_key'] ]['option_name'],
@@ -172,8 +155,8 @@ abstract class Settings implements ActionHook
                     $field['id'],
                     $field['title'],
                     $this->get_valid_callback( array( $this, $field['callback'] ) ),
-                    $section['page'],
-                    $section['id'],
+                    $sections[ $field['section'] ]['page'],
+                    $sections[ $field['section'] ]['id'],
                     $args
                 );
             }

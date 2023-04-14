@@ -44,10 +44,12 @@ final class WPSSetting extends Settings
     public function get_section() : array
     {
         return array(
-            'id'            => 'wps_settings',
-            'title'         => esc_html__( 'WordPress Plugin Starter Settings', 'wps' ),
-            'page'          => 'wps-setting-menu',
-            'callback'      => null,
+            'author_section' => array(
+                'id'            => 'wps_settings',
+                'title'         => esc_html__( 'WordPress Plugin Starter Settings', 'wps' ),
+                'page'          => 'wps-setting-menu',
+                'callback'      => null,
+            ),
         );
     }
 
@@ -69,6 +71,7 @@ final class WPSSetting extends Settings
                     'description'  => esc_html__( 'The name of the author', 'wps' ),
                 ),
                 'update_cb'     => 'author_setting_update_cb',
+                'page'          => 'wps-setting-menu',
             ),
         );
     }
@@ -87,6 +90,7 @@ final class WPSSetting extends Settings
                 'title'         => esc_html__( 'Author Name', 'wps' ),
                 'callback'      => 'wps_author_name_field_cb',
                 'setting_key'   => 'author_setting',
+                'section'       => 'author_section',
             ),
         );
     }

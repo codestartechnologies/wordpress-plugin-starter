@@ -90,11 +90,11 @@ abstract class PostMetaboxes implements ActionHook
      *
      * Used in add_post_meta() and update_post_meta()
      *
-     * @access protected
+     * @access public
      * @var string
      * @since 1.0.0
      */
-    protected string $meta_key;
+    public string $meta_key;
 
     /**
      * Optional. Whether to return a single value. This parameter has no effect if $key is not specified. Default false.
@@ -191,12 +191,16 @@ abstract class PostMetaboxes implements ActionHook
      */
     final public function save( int $post_ID, \WP_Post $post, bool $update ) : void
     {
-        if ( in_array( $post->post_type, $this->screens) && $this->validate_save( $post_ID ) ) {
-            if ( $update ) {
-                update_post_meta( $post_ID, $this->meta_key, $this->get_meta_value() );
-            } else {
-                add_post_meta( $post_ID, $this->meta_key, $this->get_meta_value(), $this->is_unique_key );
-            }
+        if (
+            ! $update ||
+            ( ! in_array( $post->post_type, $this->screens ) ) ||
+            ( ! $this->validate_save( $post_ID ) )
+        ) {
+            return;
+        }
+
+        if ( ! add_post_meta( $post_ID, $this->meta_key, $this->get_meta_value(), $this->is_unique_key ) ) {
+            update_post_meta( $post_ID, $this->meta_key, $this->get_meta_value() );
         }
     }
 
@@ -254,19 +258,5 @@ abstract class PostMetaboxes implements ActionHook
         return ( is_array( $_POST[ $this->meta_key ] ) )
             ? wp_kses_post_deep( $_POST[ $this->meta_key ] )
             : wp_strip_all_tags( $_POST[ $this->meta_key ] );
-    }
-
-    /**
-     * Deletes the registered post meta
-     *
-     * @final
-     * @static
-     * @access public
-     * @return void
-     * @since 1.0.0
-     */
-    final public static function delete() : void
-    {
-        delete_post_meta_by_key( self::$meta_key );
     }
 }
