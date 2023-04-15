@@ -2,7 +2,7 @@
 /**
  * Logger trait file.
  *
- * This file contains Logger trait for logging errors to a log files.
+ * This file contains Logger trait for logging data to a log file.
  *
  * @package    WordpressPluginStarter
  * @author     Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -19,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Trait Logger
+ * Logger Trait
  *
- * This trait is used for logging informations to a log file.
+ * This trait is used for logging information to a log file.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -31,14 +31,15 @@ trait Logger
     /**
      * Log a message to a log file
      *
-     * @access public
-     * @param string $file          The full path to the file that triggered the logger
-     * @param string $message       The message to log
-     * @param string $type          The message type. Can be: "error", "warning", "info", or "debug"
+     * @final
+     * @static
+     * @param string $file      The full path to the file that triggered the logger
+     * @param string $message   The message to log
+     * @param string $type      The message type. Can be: "error", "warning", "info", or "debug"
      * @return void
      * @since 1.0.0
      */
-    public function log( string $file, string $message, string $type = 'error' ) : void
+    final public static function log( string $file, string $message, string $type = 'error' ) : void
     {
 
         if ( ! in_array( $type, array( 'error', 'warning', 'info', 'debug' ) ) ) {
@@ -49,23 +50,21 @@ trait Logger
             $timezone_id = wps_config( 'date.timezone_id' ) ?? WPS_TIMEZONE_ID;
             date_default_timezone_set( $timezone_id );
             $message = sprintf( '[%1$s][%2$s][%3$s] %4$s', date( 'Y-m-d H:i:s' ), $type, $file, $message );
-            $log_file = $this->get_log_file()[ $type ];
-
-            if ( ! error_log( $message . PHP_EOL, 3, WPS_LOGS_PATH . $log_file ) ) {
-                $this->write_log( $message . PHP_EOL, WPS_LOGS_PATH . $log_file );
-            }
+            $log_file = self::get_log_file()[ $type ];
+            wps_log( $message, WPS_LOGS_PATH . $log_file );
         }
     }
 
     /**
-     * Get the file for logging a message
+     * Returns the name of a log file.
      *
      * @final
-     * @access public
+     * @access private
+     * @static
      * @return array
      * @since 1.0.0
      */
-    final public function get_log_file() : array
+    final private static function get_log_file() : array
     {
         return array(
             'error'     => 'error.log',
@@ -73,20 +72,5 @@ trait Logger
             'info'      => 'info.log',
             'debug'     => 'debug.log',
         );
-    }
-
-    /**
-     * Fallback logger method
-     *
-     * @param string $message
-     * @param string $path
-     * @return void
-     * @since 1.0.0
-     */
-    private function write_log( string $message, string $path ) : void
-    {
-        $resource = fopen( $path, 'a' );
-        fwrite( $resource, $message );
-        fclose( $resource );
     }
 }
