@@ -2,7 +2,7 @@
 /**
  * WPSAdminNotice class file.
  *
- * This file contains WPSAdminNotice class that will register a custom admin notification.
+ * This file contains WPSAdminNotice class that will print a custom admin notification on the screen.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class WPSAdminNotice
  *
- * This class registers a custom admin notification.
+ * This class displays a custom admin notification on the screen.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -38,7 +38,7 @@ final class WPSAdminNotice extends AdminNotices
      */
     public function __construct()
     {
-        $this->view = 'admin-notices.wps-admin-notice';
+        $this->type = 'info';
     }
 
     /**
@@ -47,10 +47,8 @@ final class WPSAdminNotice extends AdminNotices
      * @return array
      * @since 1.0.0
      */
-    public function view_args() : array
+    public function get_message() : string
     {
-        return array(
-            'message'   => esc_html__( 'Thanks for using WordPress Plugin Starter!', 'wps' ),
-        );
+        return esc_html__( 'Thanks for using WordPress Plugin Starter!', 'wps' );
     }
 }

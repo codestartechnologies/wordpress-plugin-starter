@@ -2,7 +2,7 @@
 /**
  * AdminNotices abstract class file.
  *
- * This file contains AdminNotices abstract class which contains contracts for classes that will register admin notifications.
+ * This file contains AdminNotices abstract class used for printing admin notifications on the screen.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -14,7 +14,6 @@
 namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\ActionHook;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,26 +21,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class AdminNotices
+ * AdminNotices class
  *
- * This class contains contracts that will be used to register admin notifications.
+ * This class contains contracts that will be used for printing admin notifications on the screen.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
  */
 abstract class AdminNotices implements ActionHook
 {
-
-    use ViewLoader;
-
     /**
-     * The view for displaying the notice.
+     * The type of the notification.
+     *
+     * Accepted values are: error, warning, success, and info.
      *
      * @access protected
      * @var string
      * @since 1.0.0
      */
-    protected string $view;
+    protected string $type;
+
+    /**
+     * If the notification can be dismissed by the admin.
+     *
+     * @access protected
+     * @var boolean
+     * @since 1.0.0
+     */
+    protected bool $dismissible = true;
 
     /**
      * Register add_action() and remove_action().
@@ -68,16 +75,49 @@ abstract class AdminNotices implements ActionHook
      */
     final public function notification() : void
     {
-        $this->load_view( $this->view, $this->view_args() );
+        if ( $this->can_show_notice() ) {
+            $class = array( 'notice' );
+            $class[] = $this->get_notice_type()[$this->type] ?? 'notice-error';
+            $class[] = ( $this->dismissible ) ? 'is-dismissible' : null;
+            printf( '<div class="%1$s"><p>%2$s</p></div>', implode( ' ', $class ), wp_kses_post( $this->get_message() ) );
+        }
     }
 
     /**
-     * The arguements to pass to the view
+     * Check before the admin notice is printed
      *
-     * @abstract
-     * @access public
+     * @access protected
+     * @return bool
+     * @since 1.0.0
+     */
+    protected function can_show_notice() : bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the type of notification
+     *
      * @return array
      * @since 1.0.0
      */
-    abstract public function view_args() : array;
+    private function get_notice_type() : array
+    {
+        return array(
+            'error'     => 'notice-error',
+            'warning'   => 'notice-warning',
+            'success'   => 'notice-success',
+            'info'      => 'notice-info',
+        );
+    }
+
+    /**
+     * The notification message
+     *
+     * @abstract
+     * @access public
+     * @return string
+     * @since 1.0.0
+     */
+    abstract public function get_message() : string;
 }
