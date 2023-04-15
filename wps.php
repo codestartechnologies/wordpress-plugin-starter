@@ -24,6 +24,9 @@ use Codestartechnologies\WordpressPluginStarter\Core\Constants;
 use Codestartechnologies\WordpressPluginStarter\Core\Deactivator;
 use Codestartechnologies\WordpressPluginStarter\Core\Router;
 use Codestartechnologies\WordpressPluginStarter\Core\Uninstaller;
+use WPS_Plugin\App\Activator as AppActivator;
+use WPS_Plugin\App\Deactivator as AppDeactivator;
+use WPS_Plugin\App\Uninstaller as AppUninstaller;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -84,11 +87,13 @@ final class Plugin
         // Sets the activation hook for a plugin.
         register_activation_hook( WPS_FILE, function () {
             $this->activate( new Activator() );
+            AppActivator::run();
         } );
 
         // Sets the deactivation hook for a plugin.
         register_deactivation_hook( WPS_FILE, function () {
             $this->deactivate( new Deactivator() );
+            AppDeactivator::run();
         } );
 
         // Sets the uninstallation hook for a plugin.
@@ -141,6 +146,7 @@ final class Plugin
             self::boot( Bindings::$settings ),
             self::boot( Bindings::$post_metaboxes )
         );
+        AppUninstaller::run();
     }
 
     /**
