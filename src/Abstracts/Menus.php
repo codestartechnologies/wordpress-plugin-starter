@@ -15,7 +15,7 @@ namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\ActionHook;
 use Codestartechnologies\WordpressPluginStarter\Interfaces\FilterHook;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Menus
+ * Menus class
  *
  * This class contains contracts that will be used to register admin menu pages.
  *
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class Menus implements ActionHook, FilterHook
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * The text to be displayed in the title tags of the page when the menu is selected.

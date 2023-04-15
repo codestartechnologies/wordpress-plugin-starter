@@ -14,7 +14,7 @@
 namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\ActionHook;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 use WP_Post;
 
 // Exit if accessed directly
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class PostMetaboxes
+ * PostMetaboxes class
  *
  * This class contains contracts that will be used to register metaboxes for post types.
  *
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class PostMetaboxes implements ActionHook
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * Meta box ID (used in the 'id' attribute for the meta box).

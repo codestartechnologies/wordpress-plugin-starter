@@ -15,7 +15,7 @@ namespace Codestartechnologies\WordpressPluginStarter\Core;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\ActionHook;
 use Codestartechnologies\WordpressPluginStarter\Interfaces\FilterHook;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Prevent direct access to this file.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Router
+ * Router class
  *
  * This class handles routes that will be registered in the frontend.
  *
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Router implements ActionHook, FilterHook
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * Array containing registered routes.

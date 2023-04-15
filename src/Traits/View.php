@@ -1,8 +1,8 @@
 <?php
 /**
- * ViewLoader trait
+ * View trait file
  *
- * This file contains ViewLoader trait file which contains methods for classes that load views in the admin area or public area of the site.
+ * This file contains View trait file which contains methods for including part files known as views on a page.
  *
  * @package    WordpressPluginStarter
  * @author     Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -19,14 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Trait ViewLoader
+ * View trait
  *
- * This trait contains methods for loading views in the admin area or public area of the site.
+ * This trait contains methods for including part files known as views on a page.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
  */
-trait ViewLoader
+trait View
 {
     /**
      * Include a view in the page
@@ -42,9 +42,7 @@ trait ViewLoader
     public function load_view( string $view, array $params = array(), string $type = 'admin', bool $once = true ) : void
     {
         if ( in_array( $type, array( 'admin', 'public' ), true ) ) {
-            $base_path = WPS_PATH;
-            $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
-            $this->load( $base_path, $view, $params, $once );
+            wps_load_view( $view, $params, $type, $once );
         } else {
             $this->invalid_view_type_message( $type );
         }
@@ -64,48 +62,14 @@ trait ViewLoader
     public function load_core_view( string $view, array $params = array(), string $type = 'admin', bool $once = true ) : void
     {
         if ( in_array( $type, array( 'admin', 'public' ), true ) ) {
-            $base_path = WPS_PATH . 'src/';
-            $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
-            $this->load( $base_path, $view, $params, $once );
+            wps_load_view( $view, $params, $type, $once, WPS_PATH . 'src/' );
         } else {
             $this->invalid_view_type_message( $type );
         }
     }
 
     /**
-     * Method to load the view
-     *
-     * @access private
-     * @param string $base_path     The base path to the view. Default is null
-     * @param string $view          The relative path to the view file. Paths are separated using dots (.)
-     * @param array $params         Parameters passed to the view. Default is an empty array
-     * @param bool $once            Whether to include the view only once. Default true
-     * @return void
-     * @since 1.0.0
-     */
-    private function load( string $base_path = null, string $view, array $params = array(), bool $once = true ) : void
-    {
-        $view = str_replace( '.', '/', $view );
-        $full_path = $base_path . $view . '.php';
-
-        if ( is_readable( $full_path ) ) {
-
-            if ( ! empty( $params ) ) {
-                extract( $params );
-            }
-
-            if ( $once ) {
-                require_once $full_path;
-            } else {
-                require $full_path;
-            }
-        } else {
-            $this->view_not_found_message( $full_path );
-        }
-    }
-
-    /**
-     * Prints error message for views loaded with an invalid type parameter.
+     * Prints error message for an invalid view type.
      *
      * @access private
      * @param string $type  The view type
@@ -123,26 +87,5 @@ trait ViewLoader
         ) );
 
         printf( $markup['invalid_type'], $type );
-    }
-
-    /**
-     * Prints error message for non existing views.
-     *
-     * @access private
-     * @param string $type  Path to the view file
-     * @return void
-     * @since 1.0.0
-     */
-    private function view_not_found_message( $file_path ) : void
-    {
-        $markup = array_filter( ( array ) wps_config( 'views.error_messages' ) );
-        $markup = wp_parse_args( ( array ) $markup, array(
-            'not_found'  => __(
-                '<h3 style="color: red;">View could not be loaded!</h3><p>There was an error loading <b>%s</b>. Please check file exist and is readable. </p>',
-                'wps'
-            ),
-        ) );
-
-        printf( $markup['not_found'], $file_path );
     }
 }

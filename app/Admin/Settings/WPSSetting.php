@@ -15,7 +15,7 @@ namespace WPS_Plugin\App\Admin\Settings;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\Settings;
 use Codestartechnologies\WordpressPluginStarter\Traits\Logger;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPSSetting
+ * WPSSetting class
  *
  * This class registers a custom setting.
  *
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class WPSSetting extends Settings
 {
 
-    use ViewLoader, Logger;
+    use View, Logger;
 
     /**
      * Arguements needed to add the section for the settings.

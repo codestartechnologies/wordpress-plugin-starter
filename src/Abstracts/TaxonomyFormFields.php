@@ -14,7 +14,7 @@
 namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\ActionHook;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class TaxonomyFormFields
+ * TaxonomyFormFields class
  *
  * This class contains contracts that will be used to register taxonomy form fields.
  *
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class TaxonomyFormFields implements ActionHook
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * The post type slug for the form field

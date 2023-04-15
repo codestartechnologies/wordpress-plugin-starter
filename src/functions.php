@@ -114,3 +114,61 @@ if ( ! function_exists( 'wps_log' ) ) {
         }
     }
 }
+
+if ( ! function_exists( 'wps_view_not_found_message' ) ) {
+    /**
+     * Prints error message for non existing views.
+     *
+     * @param string $type  Path to the view file
+     * @return void
+     * @since 1.0.0
+     */
+    function wps_view_not_found_message( $file_path ) : void
+    {
+        $markup = array_filter( ( array ) wps_config( 'views.error_messages' ) );
+        $markup = wp_parse_args( ( array ) $markup, array(
+            'not_found'  => __(
+                '<h3 style="color: red;">View could not be loaded!</h3><p>There was an error loading <b>%s</b>. Please check file exist and is readable. </p>',
+                'wps'
+            ),
+        ) );
+
+        printf( $markup['not_found'], $file_path );
+    }
+}
+
+if ( ! function_exists( 'wps_load_view' ) ) {
+    /**
+     * loads a file from views/
+     *
+     * @param string $view              The relative path to the view file. Paths are separated using dots (`.`)
+     * @param array $params             Parameters passed to the view. Default is an empty array
+     * @param string $type              The directory to search for the view. Can be either `admin` or `public`. Default is `admin`
+     * @param bool $once                Whether to include the view only once. Default true
+     * @param string|null $base_path    Path to the root directory where the folder containing the views is located. i.e path to `views` folder.
+     * @return void
+     * @since 1.0.0
+     */
+    function wps_load_view( string $view, array $params = array(), string $type = 'admin', bool $once = true, ?string $base_path = null ) : void
+    {
+        $view = str_replace( '.', '/', $view );
+        $base_path = is_null( $base_path ) ? WPS_PATH : $base_path;
+        $base_path .= ( 'admin' === $type ) ? WPS_ADMIN_VIEWS_PATH : WPS_PUBLIC_VIEWS_PATH;
+        $full_path = $base_path . $view . '.php';
+
+        if ( is_readable( $full_path ) ) {
+
+            if ( ! empty( $params ) ) {
+                extract( $params );
+            }
+
+            if ( $once ) {
+                require_once $full_path;
+            } else {
+                require $full_path;
+            }
+        } else {
+            wps_view_not_found_message( $full_path );
+        }
+    }
+}

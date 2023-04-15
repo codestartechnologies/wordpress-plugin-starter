@@ -14,7 +14,7 @@
 namespace WPS_Plugin\App\Public\Shortcodes;
 
 use Codestartechnologies\WordpressPluginStarter\Abstracts\Shortcodes;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPSBasicShortcode
+ * WPSBasicShortcode class
  *
  * This class registers a custom shortcode.
  *
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class WPSBasicShortcode extends Shortcodes
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * WPSBasicShortcode Class Constructor

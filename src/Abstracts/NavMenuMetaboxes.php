@@ -13,7 +13,7 @@
 
 namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 use Walker_Nav_Menu_Checklist;
 
 // Exit if accessed directly
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class NavMenuMetaboxes
+ * NavMenuMetaboxes class
  *
  * This class contains contracts that will be used to register navigation menu metaboxes.
  *
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class NavMenuMetaboxes
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * Meta box ID (used in the 'id' attribute for the meta box).

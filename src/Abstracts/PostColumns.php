@@ -14,7 +14,7 @@
 namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
 use Codestartechnologies\WordpressPluginStarter\Interfaces\PostsColumn;
-use Codestartechnologies\WordpressPluginStarter\Traits\ViewLoader;
+use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class PostColumns
+ * PostColumns class
  *
  * This class contains contracts that will be used to register post columns.
  *
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class PostColumns implements PostsColumn
 {
 
-    use ViewLoader;
+    use View;
 
     /**
      * The post type slug
