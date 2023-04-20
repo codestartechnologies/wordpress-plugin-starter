@@ -2,7 +2,7 @@
 /**
  * PublicAjax abstract class file.
  *
- * This file contains PublicAjax abstract class which contains contracts for classes that will handle public ajax requests.
+ * This file contains PublicAjax abstract class which contains contracts for processing ajax requests made on the site front-end.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class PublicAjax
+ * PublicAjax class
  *
- * This class contains contracts that will be used to handle public ajax requests.
+ * This class contains contracts for processing ajax requests made on the site front-end.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -93,6 +93,17 @@ abstract class PublicAjax implements ActionHook
     protected bool $script_in_footer;
 
     /**
+     * The name for the constant that will hold the ajax request data
+     *
+     * Example: `CONSTANT_NAME`
+     *
+     * @access protected
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $constant_identifier;
+
+    /**
      * Register add_action() and remove_action().
      *
      * @final
@@ -120,6 +131,7 @@ abstract class PublicAjax implements ActionHook
     {
         wp_enqueue_script( $this->script_handle, $this->script_src, $this->script_dependencies, $this->script_version, $this->script_in_footer );
         wp_add_inline_script( $this->script_handle, $this->get_ajax_data(), 'before' );
+        wp_set_script_translations( $this->script_handle, 'wps' );
     }
 
     /**
@@ -153,7 +165,7 @@ abstract class PublicAjax implements ActionHook
             'action'    => $this->ajax_action,
         ) );
 
-        return "const WPS_PUBLIC_AJAX_REQUEST = {$data};";
+        return "const {$this->constant_identifier} = {$data};";
     }
 
     /**

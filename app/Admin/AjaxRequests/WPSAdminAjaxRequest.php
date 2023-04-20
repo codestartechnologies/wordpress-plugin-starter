@@ -2,7 +2,7 @@
 /**
  * WPSAdminAjaxRequest class file.
  *
- * This file contains WPSAdminAjaxRequest class that will register a custom admin ajax request.
+ * This file contains WPSAdminAjaxRequest class that will process an ajax request made from the admin area.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPSAdminAjaxRequest
+ * WPSAdminAjaxRequest class
  *
- * This class registers a custom admin ajax request.
+ * This class processes an ajax request made from the admin area.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -45,6 +45,7 @@ final class WPSAdminAjaxRequest extends AdminAjax
         $this->script_dependencies  = array( 'jquery' );
         $this->script_version       = false;
         $this->script_in_footer     = true;
+        $this->constant_identifier  = 'WPS_ADMIN_AJAX_REQUEST';
     }
 
     /**
@@ -56,7 +57,7 @@ final class WPSAdminAjaxRequest extends AdminAjax
      */
     public function can_enqueue_script( string $hook_suffix ) : bool
     {
-        return true;
+        return ( 'wps-menu_page_wps-sub-menu' === $hook_suffix );
     }
 
     /**
@@ -68,9 +69,7 @@ final class WPSAdminAjaxRequest extends AdminAjax
     public function handle_request() : void
     {
         $data = $_POST['wps_data'] ?? null;
-        $message = ( $data === 'Hello WPS!' ) ? 'Your request data is valid!' : 'Your request data is not valid!';
-        wp_send_json_success( array(
-            'msg'  => $message . '(' . $data . ')',
-        ) );
+        $response = ( $data === 'WPS' ) ? esc_html__( 'Your data is valid!', 'wps' ) : esc_html__( 'Your data is not valid!', 'wps' );
+        wp_send_json_success( array( 'msg' => $response . '(' . $data . ')' ) );
     }
 }

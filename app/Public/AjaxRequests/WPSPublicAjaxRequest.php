@@ -2,7 +2,7 @@
 /**
  * WPSPublicAjaxRequest class file.
  *
- * This file contains WPSPublicAjaxRequest class that will register a custom public ajax request.
+ * This file contains WPSPublicAjaxRequest class that will process an ajax request made at the site front-end.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPSPublicAjaxRequest
+ * WPSPublicAjaxRequest class
  *
- * This class registers a custom admin public request.
+ * This class will process an ajax request made at the site front-end.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class WPSPublicAjaxRequest extends PublicAjax
 {
     /**
-     * WPSPublicAjaxRequest Class Constructor
+     * WPSPublicAjaxRequest constructor
      *
      * @return void
      * @since 1.0.0
@@ -45,6 +45,7 @@ final class WPSPublicAjaxRequest extends PublicAjax
         $this->script_dependencies  = array( 'jquery' );
         $this->script_version       = false;
         $this->script_in_footer     = true;
+        $this->constant_identifier  = 'WPS_PUBLIC_AJAX_REQUEST';
     }
 
     /**
@@ -56,9 +57,7 @@ final class WPSPublicAjaxRequest extends PublicAjax
     public function handle_request() : void
     {
         $data = $_POST['wps_data'] ?? null;
-        $message = ( $data === 'Hello WPS!' ) ? 'Your request data is valid!' : 'Your request data is not valid!';
-        wp_send_json_success( array(
-            'msg'  => $message . '(' . $data . ')',
-        ) );
+        $response = ( $data === 'WPS' ) ? 'valid' : 'invalid';
+        wp_send_json_success( array( 'msg' => $response ) );
     }
 }

@@ -2,7 +2,7 @@
 /**
  * AdminAjax abstract class file.
  *
- * This file contains AdminAjax abstract class which contains contracts for classes that will handle admin ajax requests.
+ * This file contains AdminAjax abstract class which contains contracts for processing ajax requests made from the admin area.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class AdminAjax
+ * AdminAjax class
  *
- * This class contains contracts that will be used to handle admin ajax requests.
+ * This class contains contracts used for processing ajax requests made from the admin area.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -94,6 +94,17 @@ abstract class AdminAjax implements ActionHook
     protected bool $script_in_footer;
 
     /**
+     * The name for the constant that will hold the ajax request data
+     *
+     * Example: `CONSTANT_NAME`
+     *
+     * @access protected
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $constant_identifier;
+
+    /**
      * Register add_action() and remove_action().
      *
      * @final
@@ -121,6 +132,7 @@ abstract class AdminAjax implements ActionHook
         if ( $this->can_enqueue_script( $hook_suffix ) ) {
             wp_enqueue_script( $this->script_handle, $this->script_src, $this->script_dependencies, $this->script_version, $this->script_in_footer );
             wp_add_inline_script( $this->script_handle, $this->get_ajax_data(), 'before' );
+            wp_set_script_translations( $this->script_handle, 'wps' );
         }
     }
 
@@ -155,7 +167,7 @@ abstract class AdminAjax implements ActionHook
             'action'    => $this->ajax_action,
         ) );
 
-        return "const WPS_ADMIN_AJAX_REQUEST = {$data};";
+        return "const {$this->constant_identifier} = {$data};";
     }
 
     /**
