@@ -40,6 +40,15 @@ class Hooks implements ActionHook, FilterHook
      */
     public function register_add_action() : void
     {
+        /**
+         * Add your custom action hooks below.
+         *
+         * Below are custom action hooks that are added by default. You can chose to delete or comment out the lines below if your plugin
+         * will not need these features.
+         */
+
+
+        // Fires after WordPress has finished loading but before any headers are sent.
         add_action( 'init', array( $this, 'action_init' ) );
     }
 
@@ -51,7 +60,10 @@ class Hooks implements ActionHook, FilterHook
      */
     public function register_add_filter() : void
     {
-        //
+        /**
+         * Add your custom action hooks below.
+         */
+
     }
 
     /**
