@@ -2,7 +2,7 @@
 /**
  * Router class file.
  *
- * This file contains Router class which handles routes that will be registered in the frontend.
+ * This file contains Router class used in registering custom route enpoints on the site frontend.
  *
  * @package    WordpressPluginStarter
  * @author     Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Router class
  *
- * This class handles routes that will be registered in the frontend.
+ * This class registers custom route enpoints on the site frontend.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -51,9 +51,9 @@ final class Router implements ActionHook, FilterHook
      * @param array $routes
      * @since 1.0.0
      */
-    public function __construct( array $routes = array() )
+    public function __construct()
     {
-        $this->set_routes( $routes );
+        $this->set_routes( wps_config( 'routes.routes' ) );
     }
 
     /**
@@ -112,11 +112,17 @@ final class Router implements ActionHook, FilterHook
     {
         if ( $this->route_exists() ) {
             $route_handler = $this->get_route_handler( $this->get_current_route() );
+            $check = ( isset( $route_handler['capability'] ) ) ? current_user_can( $route_handler['capability'] ) : true;
 
-            if ( isset( $route_handler['view'] ) ) {
-                $this->load_view( $route_handler['view'], array(), 'public' );
+            if ( ( ! $check ) || ( ! isset( $route_handler['view'] ) ) ) {
+                get_header();
+                $content = ( ! $check )
+                    ? __( '<br /> <h1><center>You do not have permission to view this page!</center></h1>', 'wps' )
+                    : __( '<br /> <h1><center>No view found! Set a default view for this page.</center></h1>', 'wps' );
+                echo $content;
+                get_footer();
             } else {
-                _e( '<br /><br /> <h1><center>Empty Page! <br /> No view found!</center></h1>', 'wps' );
+                $this->load_view( $route_handler['view'], array(), 'public' );
             }
 
             exit;

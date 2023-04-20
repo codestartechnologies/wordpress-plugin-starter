@@ -40,6 +40,11 @@ final class Constants
      */
     public static function define_core_constants() : void
     {
+        // Project Name
+        if ( ! defined( 'WPS_PROJECT_NAME' ) ) {
+            define( 'WPS_PROJECT_NAME', 'WordPress Plugin Starter' );
+        }
+
         // Plugin minimum WordPress version
         if ( ! defined( 'WPS_MIN_WP_VERSION' ) ) {
             define( 'WPS_MIN_WP_VERSION', '5.6.5' );

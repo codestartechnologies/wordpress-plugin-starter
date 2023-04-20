@@ -198,7 +198,7 @@ final class Plugin
     public function run() : void
     {
         $this->bootstrap = new Bootstrap(
-            new Router( wps_config( 'routes.routes' ) ),
+            new Router(),
             new Hooks,
             new AdminHooks(),
             new PublicHooks(),

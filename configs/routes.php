@@ -24,15 +24,18 @@ return array(
         '/wps-page'     => array(
 
             // The part file that will display content on the page
-            'view'  => 'pages.wps-custom-page',
+            'view'  => 'pages.wps-page',
 
             // The page title
             'title' => 'WPS Custom Page',
 
+            // Capability needed to access the page
+            'capability' => null,
+
         ),
 
         /**
-         * You can add your custom route endpoints below.
+         * You can add settings your custom route endpoints below.
          */
 
     ),
