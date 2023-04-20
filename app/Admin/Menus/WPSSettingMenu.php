@@ -38,15 +38,15 @@ final class WPSSettingMenu extends OptionsMenus
      */
     public function __construct()
     {
-        $this->page_title   = esc_html__( 'WPS Admin Options Menu Page', 'wps' );
-        $this->menu_title   = esc_html__( 'WPS Options Menu', 'wps' );
+        $this->page_title   = esc_html__( 'WPS Settings Page', 'wps' );
+        $this->menu_title   = esc_html__( 'WPS Settings Menu', 'wps' );
         $this->capability   = 'manage_options';
         $this->menu_slug    = 'wps-setting-menu';
         $this->view         = 'admin-menu-pages.wps-setting-menu';
     }
 
     /**
-     * Check before adding the menu page
+     * Check before adding the admin page.
      *
      * @return boolean
      * @since 1.0.0
@@ -54,17 +54,6 @@ final class WPSSettingMenu extends OptionsMenus
     public function can_add_menupage() : bool
     {
         return true;
-    }
-
-    /**
-     * Fires before a particular screen is loaded. Example can be to handle POST or GET request sent to the menu page
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function load_page() : void
-    {
-        //
     }
 
     /**
@@ -78,17 +67,5 @@ final class WPSSettingMenu extends OptionsMenus
         return array(
             'page'  => $this->menu_slug,
         );
-    }
-
-    /**
-     * The content to display in the footer of the admin menu page
-     *
-     * @param string $text
-     * @return string
-     * @since 1.0.0
-     */
-    public function get_footer_content( string $text ) : string
-    {
-        return $text;
     }
 }

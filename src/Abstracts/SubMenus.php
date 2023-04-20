@@ -2,7 +2,7 @@
 /**
  * SubMenus abstract class file.
  *
- * This file contains SubMenus abstract class which contains contracts for classes that will register admin sub-menu pages.
+ * This file contains SubMenus abstract class which contains contracts used to create admin sub-menu pages.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -19,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class SubMenus
+ * SubMenus class
  *
- * This class contains contracts that will be used to register admin sub-menu pages.
+ * This class contains contracts that will be used to create admin sub-menu pages.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>

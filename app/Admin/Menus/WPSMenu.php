@@ -38,24 +38,13 @@ final class WPSMenu extends Menus
      */
     public function __construct()
     {
-        $this->page_title   = esc_html__( 'WPS Admin Menu Page', 'wps' );
+        $this->page_title   = esc_html__( 'WPS Menu Page', 'wps' );
         $this->menu_title   = esc_html__( 'WPS Menu', 'wps' );
         $this->capability   = 'manage_options';
         $this->menu_slug    = 'wps-menu';
         $this->icon_url     = 'dashicons-menu';
         $this->position     = null;
         $this->view         = 'admin-menu-pages.wps-menu';
-    }
-
-    /**
-     * Fires before a particular screen is loaded. Example can be to handle POST or GET request sent to the menu page
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function load_page() : void
-    {
-        //
     }
 
     /**
@@ -67,7 +56,7 @@ final class WPSMenu extends Menus
     public function menu_page_view_args() : array
     {
         return array(
-            'random_text'   => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis cupiditate corrupti quibusdam sapiente ea nisi odit molestias, id consectetur explicabo molestiae fugiat perspiciatis rem nemo ipsam pariatur perferendis corporis sed?',
+            'author'   => 'Codestar Technologies',
         );
     }
 
@@ -80,7 +69,7 @@ final class WPSMenu extends Menus
      */
     public function get_footer_content( string $text ) : string
     {
-        $text = sprintf( '<b>%s</b>', esc_html__( 'WPS Admin Menu Page - Created Using WordPress Plugin Starter.', 'wps' ) );
+        $text = sprintf( '<b>%s</b>', esc_html__( 'Powered by WordPress Plugin Starter', 'wps' ) );
         return $text;
     }
 }

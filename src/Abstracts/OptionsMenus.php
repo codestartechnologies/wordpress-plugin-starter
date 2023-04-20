@@ -2,7 +2,7 @@
 /**
  * OptionsMenus abstract class file.
  *
- * This file contains OptionsMenus abstract class which contains contracts for classes that will register admin options menu pages.
+ * This file contains OptionsMenus abstract class which contains contracts for creating admin pages under `Settings` in the admin dashboard.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -19,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class OptionsMenus
+ * OptionsMenus class
  *
- * This class contains contracts that will be used to register admin options menu pages.
+ * This class contains contracts for creating admin pages under `Settings` in the admin dashboard.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -38,7 +38,7 @@ abstract class OptionsMenus extends Menus
      */
     final public function menu_page() : void
     {
-        $hook_suffix = add_options_page(
+        add_options_page(
             $this->page_title,
             $this->menu_title,
             $this->capability,

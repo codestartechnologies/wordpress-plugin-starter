@@ -39,44 +39,26 @@ final class WPSSubMenu extends SubMenus
     public function __construct()
     {
         $this->parent_slug  = 'wps-menu';
-        $this->page_title   = esc_html__( 'WPS Admin Sub Menu Page', 'wps' );
-        $this->menu_title   = esc_html__( 'WPS Sub-Menu', 'wps' );
+        $this->page_title   = esc_html__( 'WPS Sub Menu Page', 'wps' );
+        $this->menu_title   = esc_html__( 'WPS Sub Menu', 'wps' );
         $this->capability   = 'manage_options';
         $this->menu_slug    = 'wps-sub-menu';
         $this->view         = 'admin-menu-pages.wps-submenu';
     }
 
     /**
-     * Fires before a particular screen is loaded. Example can be to handle POST or GET request sent to the menu page
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function load_page() : void
-    {
-        //
-    }
-
-    /**
-     * Arguements to pass to the menu page view
+     * An array containing settings for enqueuing css stylesheets on the page
      *
      * @return array
      * @since 1.0.0
      */
-    public function menu_page_view_args() : array
+    protected function get_styles() : array
     {
-        return array();
-    }
-
-    /**
-     * The content to display in the footer of the admin menu page
-     *
-     * @param string $text
-     * @return string
-     * @since 1.0.0
-     */
-    public function get_footer_content( string $text ) : string
-    {
-        return $text;
+        return array(
+            array(
+                'handle'    => 'wps-button',
+                'src'       => WPS_CSS_BASE_URL . 'button.css',
+            ),
+        );
     }
 }

@@ -2,7 +2,7 @@
 /**
  * Menus abstract class file.
  *
- * This file contains Menus abstract class which contains contracts for classes that will register admin menu pages.
+ * This file contains Menus abstract class which contains contracts used to create admin menu pages.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Menus class
  *
- * This class contains contracts that will be used to register admin menu pages.
+ * This class contains contracts that will be used to create admin menu pages.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -99,6 +99,24 @@ abstract class Menus implements ActionHook, FilterHook
     protected string $view;
 
     /**
+     * Check for whether WordPress media JS API files can be enqueued on the page.
+     *
+     * @access protected
+     * @var boolean
+     * @since 1.0.0
+     */
+    protected bool $can_enqueue_media = false;
+
+    /**
+     * Check for whether WordPress editor css and js files can be enqueued on the page.
+     *
+     * @access protected
+     * @var boolean
+     * @since 1.0.0
+     */
+    protected bool $can_enqueue_editor = false;
+
+    /**
      * Register add_action() and remove_action().
      *
      * @final
@@ -112,6 +130,7 @@ abstract class Menus implements ActionHook, FilterHook
             $hook_suffix = $this->get_menu_hookname();
             add_action( 'admin_menu', array( $this, 'menu_page' ) );
             add_action( "load-{$hook_suffix}", array( $this, 'load_page' ) );
+            add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ) );
         }
     }
 
@@ -123,7 +142,7 @@ abstract class Menus implements ActionHook, FilterHook
      * @return void
      * @since 1.0.0
      */
-    final public function register_add_filter(): void
+    final public function register_add_filter() : void
     {
         add_filter( 'admin_footer_text', array( $this, 'footer_text' ) );
     }
@@ -213,35 +232,183 @@ abstract class Menus implements ActionHook, FilterHook
     }
 
     /**
-     * "load-{$page_hook}" action hook callback
+     * "load-{$page_hook}" action hook callback.
      *
-     * Fires before a particular screen is loaded. Example can be to handle POST or GET request sent to the menu page
+     * Fires before a particular screen is loaded. Example can be to handle POST or GET request sent to the menu page.
+     * Can be modified by a child class to handle tasks that will run before the particular page is loaded.
      *
-     * @abstract
-     * @access public
      * @return void
      * @since 1.0.0
      */
-    abstract public function load_page() : void;
+    public function load_page() : void
+    {
+        //
+    }
 
     /**
-     * Arguements to pass to the menu page view
+     * "admin_enqueue_scripts" action hook callback
      *
-     * @abstract
-     * @access public
+     * Enqueue scripts for all admin pages.
+     *
+     * @final
+     * @param string $hook_suffix
+     * @return void
+     * @since 1.0.0
+     */
+    final public function action_admin_enqueue_scripts( string $hook_suffix ) : void
+    {
+        if ( $hook_suffix === $this->get_menu_hookname() ) {
+
+            $this->set_script_translations();
+
+            $this->enqueue_css_files();
+
+            $this->enqueue_js_files();
+
+            if ( $this->can_enqueue_editor ) {
+                wp_enqueue_editor();
+            }
+
+            if ( $this->can_enqueue_media ) {
+                wp_enqueue_media();
+            }
+        }
+    }
+
+    /**
+     * Sets translated strings for a script.
+     *
+     * @access private
+     * @return void
+     * @since 1.0.0
+     */
+    private function set_script_translations() : void
+    {
+        foreach ( $this->get_script_translations() as $translation_setting ) {
+            $translation_setting = wp_parse_args( $translation_setting, array(
+                'handle'    => '',
+                'domain'    => '',
+                'path'      => null,
+            ) );
+            wp_set_script_translations( $translation_setting['handle'], $translation_setting['domain'], $translation_setting['path'] );
+        }
+    }
+
+    /**
+     * Adds CSS stylesheets on the page.
+     *
+     * @access private
+     * @return void
+     * @since 1.0.0
+     */
+    private function enqueue_css_files() : void
+    {
+        foreach ( $this->get_styles() as $style_setting ) {
+            $style_setting = wp_parse_args( $style_setting, array(
+                'handle'    => '',
+                'src'       => '',
+                'deps'      => array(),
+                'ver'       => false,
+                'media'     => 'all',
+            ) );
+            wp_enqueue_style(
+                $style_setting['handle'],
+                $style_setting['src'],
+                $style_setting['deps'],
+                $style_setting['ver'],
+                $style_setting['media']
+            );
+        }
+    }
+
+    /**
+     * Adds Javascfript files on the page.
+     *
+     * @access private
+     * @return void
+     * @since 1.0.0
+     */
+    private function enqueue_js_files() : void
+    {
+        foreach ( $this->get_scripts() as $script_setting ) {
+            $script_setting = wp_parse_args( $script_setting, array(
+                'handle'    => '',
+                'src'       => '',
+                'deps'      => array(),
+                'ver'       => false,
+                'in_footer' => false,
+            ) );
+            wp_enqueue_script(
+                $script_setting['handle'],
+                $script_setting['src'],
+                $script_setting['deps'],
+                $script_setting['ver'],
+                $script_setting['in_footer']
+            );
+        }
+    }
+
+    /**
+     * Arguements that will passed to the page view.
+     *
+     * @access protected
      * @return array
      * @since 1.0.0
      */
-    abstract public function menu_page_view_args() : array;
+    protected function menu_page_view_args() : array
+    {
+        return array(
+            'page_title' => $this->page_title,
+            'menu_title' => $this->menu_title,
+        );
+    }
 
     /**
-     * The content to display in the footer of the admin menu page
+     * The content to display in the footer of the admin menu page.
      *
-     * @abstract
-     * @access public
+     * @access protected
      * @param string $text
      * @return string
      * @since 1.0.0
      */
-    abstract public function get_footer_content( string $text ) : string;
+    protected function get_footer_content( string $text ) : string
+    {
+        return $text;
+    }
+
+    /**
+     * An array containing settings for adding script translations.
+     *
+     * @access protected
+     * @return array
+     * @since 1.0.0
+     */
+    protected function get_script_translations() : array
+    {
+        return array();
+    }
+
+    /**
+     * An array containing settings for enqueuing css stylesheets on the page
+     *
+     * @access protected
+     * @return array
+     * @since 1.0.0
+     */
+    protected function get_styles() : array
+    {
+        return array();
+    }
+
+    /**
+     * An array containing settings for enqueuing javascript files on the page
+     *
+     * @access protected
+     * @return array
+     * @since 1.0.0
+     */
+    protected function get_scripts() : array
+    {
+        return array();
+    }
 }

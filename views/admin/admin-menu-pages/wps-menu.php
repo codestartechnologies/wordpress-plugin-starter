@@ -12,16 +12,23 @@
 /**
  * Below are default variables that are passed to this file.
  *
- * $random_text     - Passed to the view by WPSMenu Class.
+ * $page_title     - The page title. Passed to the view by Menus abstract class.
+ * $menu_title     - The menu link name. Passed to the view by Menus abstract class.
+ *
  */
 
+ /**
+  * The variables below are passed from WPSMenu class, and have overidden the default variables passed by Menus abstract class.
+  *
+  * $author    - Author name.
+  */
 ?>
 
 <div class="wrap">
 
     <h1> <?php echo get_admin_page_title(); ?> </h1>
     <p>
-        <b>This is a random text:</b> <?php $random_text; ?>
+        <?php printf( __( 'WordPress Plugin starter created by <b>%s</b>.', 'wps' ), $author ); ?>
     </p>
 
 </div>

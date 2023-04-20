@@ -12,7 +12,15 @@
 /**
  * Below are default variables that are passed to this file.
  *
- * $page - Passed to the view by WPSSettingMenu Class.
+ * $page_title     - The page title. Passed to the view by Menus abstract class.
+ * $menu_title     - The menu link name. Passed to the view by Menus abstract class.
+ *
+ */
+
+ /**
+ * The variables below are passed from WPSSettingMenu class, and have overidden the default variables passed by Menus abstract class.
+ *
+ * $page - Page slug to display the setting.
  *
  */
 

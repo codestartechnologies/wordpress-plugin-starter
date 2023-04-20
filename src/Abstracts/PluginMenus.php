@@ -2,7 +2,7 @@
 /**
  * PluginMenus abstract class file.
  *
- * This file contains PluginMenus abstract class which contains contracts for classes that will register admin plugin menu pages.
+ * This file contains PluginMenus abstract class which contains contracts for creating admin pages under `Plugins` in the admin dashboard.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -19,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class PluginMenus
+ * PluginMenus class
  *
- * This class contains contracts that will be used to register admin plugin menu pages.
+ * This class contains contracts that will be used to create admin pages under `Plugins` in the admin dashboard.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -38,7 +38,7 @@ abstract class PluginMenus extends Menus
      */
     final public function menu_page() : void
     {
-        $hook_suffix = add_plugins_page(
+        add_plugins_page(
             $this->page_title,
             $this->menu_title,
             $this->capability,
@@ -57,6 +57,6 @@ abstract class PluginMenus extends Menus
      */
     protected function get_menu_hookname() : string
     {
-        return '';
+        return 'plugins_page_' . $this->menu_slug;
     }
 }

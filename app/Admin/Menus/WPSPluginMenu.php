@@ -40,44 +40,10 @@ final class WPSPluginMenu extends PluginMenus
      */
     public function __construct()
     {
-        $this->page_title   = esc_html__( 'WPS Admin Plugin Menu Page', 'wps' );
+        $this->page_title   = esc_html__( 'WPS Plugin Page', 'wps' );
         $this->menu_title   = esc_html__( 'WPS Plugin Menu', 'wps' );
         $this->capability   = 'manage_options';
         $this->menu_slug    = 'wps-plugin-menu';
         $this->view         = 'admin-menu-pages.wps-plugin-menu';
-    }
-
-    /**
-     * Fires before a particular screen is loaded. Example can be to handle POST or GET request sent to the menu page
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function load_page() : void
-    {
-        //
-    }
-
-    /**
-     * Arguements to pass to the menu page view
-     *
-     * @return array
-     * @since 1.0.0
-     */
-    public function menu_page_view_args() : array
-    {
-        return array();
-    }
-
-    /**
-     * The content to display in the footer of the admin menu page
-     *
-     * @param string $text
-     * @return string
-     * @since 1.0.0
-     */
-    public function get_footer_content( string $text ) : string
-    {
-        return $text;
     }
 }
