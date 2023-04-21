@@ -2,7 +2,7 @@
 /**
  * Constants class file.
  *
- * This file contains Constants class which defines needed constants that will be used in your plugin development.
+ * This file contains Constants class which defines needed constants to ease your plugin development processes.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -19,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Constants
+ * Constants class
  *
- * This class defines needed constants that will be used in your plugin development.
+ * This class defines needed constants to ease your plugin development processes.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -39,13 +39,18 @@ final class Constants
     public static function define_constants() : void
     {
         // Plugin Name
-        if ( ! defined( 'WPS_PLUGIN_NAME' ) ) {
-            define( 'WPS_PLUGIN_NAME', 'WPS Plugin' );
+        if ( ! defined( 'PLUGIN_NAME' ) ) {
+            define( 'PLUGIN_NAME', $_ENV['PLUGIN_NAME'] ?? 'YOUR_PLUGIN_NAME' );
         }
 
         // Plugin Version
-        if ( ! defined( 'WPS_PLUGIN_VERSION' ) ) {
-            define( 'WPS_PLUGIN_VERSION', '1.0.0' );
+        if ( ! defined( 'PLUGIN_VERSION' ) ) {
+            define( 'PLUGIN_VERSION', $_ENV['PLUGIN_VERSION'] ?? 'YOUR_PLUGIN_VERSION' );
         }
+
+        /**
+         * Define your custom constants below. It is recommended you check for existence of a constant before defining it.
+         */
+
     }
 }

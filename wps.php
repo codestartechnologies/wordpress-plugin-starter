@@ -24,6 +24,7 @@ use Codestartechnologies\WordpressPluginStarter\Core\Constants;
 use Codestartechnologies\WordpressPluginStarter\Core\Deactivator;
 use Codestartechnologies\WordpressPluginStarter\Core\Router;
 use Codestartechnologies\WordpressPluginStarter\Core\Uninstaller;
+use Dotenv\Dotenv;
 use WPS_Plugin\App\Activator as AppActivator;
 use WPS_Plugin\App\Deactivator as AppDeactivator;
 use WPS_Plugin\App\Uninstaller as AppUninstaller;
@@ -77,6 +78,10 @@ final class Plugin
 
         // Require wordpress plugin starter autoloader file for autoloading classes.
         require_once trailingslashit( plugin_dir_path( WPS_FILE ) ) . 'autoload.php';
+
+        // Set up phpdotenv for use in the application.
+        $dotenv = Dotenv::createImmutable( __DIR__ );
+        $dotenv->safeLoad();
 
         // Define core constants required by wordpress plugin starter.
         Constants::define_core_constants();
