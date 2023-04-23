@@ -13,7 +13,7 @@
 
 namespace Codestartechnologies\WordpressPluginStarter\Abstracts;
 
-use Codestartechnologies\WordpressPluginStarter\Interfaces\PostsColumn;
+use Codestartechnologies\WordpressPluginStarter\Interfaces\FilterHook;
 use Codestartechnologies\WordpressPluginStarter\Traits\View;
 
 // Exit if accessed directly
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
  */
-abstract class PostColumns implements PostsColumn
+abstract class PostColumns implements FilterHook
 {
 
     use View;
@@ -134,11 +134,25 @@ abstract class PostColumns implements PostsColumn
     {
         if ( $column_name === $this->column_key ) {
             $meta_value = get_post_meta( $post_id, $this->meta_key, $this->is_single_key );
-            $this->load_view( $this->view, array(
-                'post_id'       => $post_id,
-                'meta_key'      => $this->meta_key,
-                'meta_value'    => $meta_value,
-            ), 'admin', false );
+            $this->display_column( $post_id, $this->meta_key, $meta_value );
         }
+    }
+
+    /**
+     * Display content for the post column.
+     *
+     * @param integer $post_id
+     * @param string $meta_key
+     * @param mixed $meta_value
+     * @return void
+     * @since 1.0.0
+     */
+    protected function display_column( int $post_id, string $meta_key, mixed $meta_value ) : void
+    {
+        $this->load_view( $this->view, array(
+            'post_id'       => $post_id,
+            'meta_key'      => $meta_key,
+            'meta_value'    => $meta_value,
+        ), 'admin', false );
     }
 }
