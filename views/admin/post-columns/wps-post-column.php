@@ -12,12 +12,11 @@
 /**
  * Below are default variables that are passed to this file.
  *
- * $post_id         - The current post ID. Passed to the view by default
- * $meta_key        - The meta key. Passed to the view by default
- * $meta_value      - The meta value. Passed to the view by default
+ * $post_id         - The current post ID.
+ * $meta_key        - The meta key.
+ * $meta_value      - The meta value.
  */
 
 ?>
 
-<small> <?php echo $meta_value['heading'] ?? null; ?> </small> <b>-</b>
-<a href="<?php echo admin_url( 'post.php?post=' . $post_id . '&action=edit' ); ?>">Edit</a>
+<a href="<?php echo admin_url( 'post.php?post=' . $post_id . '&action=edit' ); ?>"> <?php echo $meta_value['heading'] ?? null; ?> </a>

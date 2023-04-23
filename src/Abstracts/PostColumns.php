@@ -2,7 +2,7 @@
 /**
  * PostColumns abstract class file.
  *
- * This file contains PostColumns abstract class which contains contracts for classes that will register post columns.
+ * This file contains PostColumns abstract class which contains contracts for creating custom table columns for different post types.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * PostColumns class
  *
- * This class contains contracts that will be used to register post columns.
+ * This class contains contracts that will be used to create custom table columns for different post types.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>

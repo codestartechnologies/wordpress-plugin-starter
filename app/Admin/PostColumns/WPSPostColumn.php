@@ -2,7 +2,7 @@
 /**
  * WPSPostColumn class file.
  *
- * This file contains WPSPostColumn class that will register a custom post column.
+ * This file contains WPSPostColumn class that will create a custom table column under wps_post.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -23,13 +23,45 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class WPSPostColumn
  *
- * This class registers a custom post column.
+ * This class creates a custom table column under wps_post.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
  */
 final class WPSPostColumn extends PostColumns
 {
+    /**
+     * The slug for the post type where the post column will be added.
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $post_type = 'wps_post';
+
+    /**
+     * Meta key that will be used to display data on the column.
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $meta_key = 'wps_post_text';
+
+    /**
+     * The post column key identifier
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $column_key = 'wps_post_text';
+
+    /**
+     * The view for displaying the post column
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $view = 'post-columns.wps-post-column';
+
     /**
      * WPSPostColumn constructor
      *
@@ -38,11 +70,7 @@ final class WPSPostColumn extends PostColumns
      */
     public function __construct()
     {
-        $this->post_type        = 'wps_post';
-        $this->meta_key         = 'wps_post_text';
         $this->is_single_key    = true;
-        $this->column_key       = 'wps_post_text';
-        $this->column_title     = esc_html__( 'Custom Meta - Heading:', 'wps' );
-        $this->view             = 'post-columns.wps-post-column';
+        $this->column_title     = esc_html__( 'Custom Heading', 'wps' );
     }
 }
