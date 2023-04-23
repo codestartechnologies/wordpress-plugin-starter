@@ -1,8 +1,8 @@
 <?php
 /**
- * WPSPostMetabox class file.
+ * WPSAdvancedPostMetabox class file.
  *
- * This file contains WPSPostMetabox class that will be used to create a custom metabox for wps_post.
+ * This file contains WPSAdvancedPostMetabox class that will be used to create a custom metabox for wps_post.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -21,14 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPSPostMetabox Class
+ * WPSAdvancedPostMetabox Class
  *
  * This class will create a custom metabox for wps_post.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
  */
-final class WPSPostMetabox extends PostMetaboxes
+final class WPSAdvancedPostMetabox extends PostMetaboxes
 {
     /**
      * Metadata key.
@@ -36,7 +36,7 @@ final class WPSPostMetabox extends PostMetaboxes
      * @var string
      * @since 1.0.0
      */
-    public string $meta_key = 'wps_post_type_id';
+    public string $meta_key = 'wps_post_text';
 
     /**
      * Meta box ID
@@ -44,7 +44,7 @@ final class WPSPostMetabox extends PostMetaboxes
      * @var string
      * @since 1.0.0
      */
-    protected string $id = 'wps_post_metabox';
+    protected string $id = 'wps_advanced_post_metabox';
 
     /**
      * The context within the screen where the box should display.
@@ -68,17 +68,17 @@ final class WPSPostMetabox extends PostMetaboxes
      * @var string
      * @since 1.0.0
      */
-    protected string $metabox_view = 'posts-meta-boxes.wps-post-metabox';
+    protected string $metabox_view = 'posts-meta-boxes.wps-advanced-post-metabox';
 
     /**
-     * WPSPostMetabox constructor
+     * WPSAdvancedPostMetabox constructor
      *
      * @return void
      * @since 1.0.0
      */
     public function __construct()
     {
-        $this->title = esc_html__( 'WPS - Post Type ID', 'wps' );
+        $this->title = esc_html__( 'WPS - Custom Heading and Content', 'wps' );
         $this->screens = array( 'wps_post', );
         $this->is_single_key = true;
         $this->is_unique_key = true;

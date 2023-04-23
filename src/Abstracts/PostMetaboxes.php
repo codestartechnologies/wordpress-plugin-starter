@@ -2,7 +2,7 @@
 /**
  * PostMetaboxes abstract class file.
  *
- * This file contains PostMetaboxes abstract class which contains contracts for classes that will register metaboxes for post types.
+ * This file contains PostMetaboxes abstract class which contains contracts for creating metaboxes for different post types.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * PostMetaboxes class
  *
- * This class contains contracts that will be used to register metaboxes for post types.
+ * This class contains contracts that will be used for creating metaboxes for different post types.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -146,6 +146,15 @@ abstract class PostMetaboxes implements ActionHook
     protected string $metabox_view;
 
     /**
+     * Capability to check before the meta value can be saved in database.
+     *
+     * @access protected
+     * @var string
+     * @since 1.0.0
+     */
+    protected string $capability = 'manage_options';
+
+    /**
      * Register add_action() and remove_action().
      *
      * @final
@@ -239,7 +248,7 @@ abstract class PostMetaboxes implements ActionHook
         return (
             isset( $_POST[ $this->nonce_name ] ) &&
             wp_verify_nonce( $_POST[ $this->nonce_name ], $this->nonce_action ) &&
-            current_user_can( 'manage_options' ) &&
+            current_user_can( $this->capability ) &&
             ! wp_is_post_autosave( $post_ID ) &&
             ! wp_is_post_revision( $post_ID ) &&
             ! ( is_multisite() && ms_is_switched() )

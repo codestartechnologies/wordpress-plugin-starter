@@ -21,6 +21,7 @@ use WPS_Plugin\App\Admin\Menus\WPSSettingMenu;
 use WPS_Plugin\App\Admin\Menus\WPSSubMenu;
 use WPS_Plugin\App\Admin\NavMenuMetaboxes\WPSNavMenuMetabox;
 use WPS_Plugin\App\Admin\PostColumns\WPSPostColumn;
+use WPS_Plugin\App\Admin\PostMetaboxes\WPSAdvancedPostMetabox;
 use WPS_Plugin\App\Admin\PostMetaboxes\WPSPostMetabox;
 use WPS_Plugin\App\Admin\Settings\WPSSetting;
 use WPS_Plugin\App\Admin\TaxonomyFormFields\WPSTaxonomyFormField;
@@ -140,6 +141,7 @@ final class Bindings
      */
     public static array $post_metaboxes = array(
         WPSPostMetabox::class,
+        WPSAdvancedPostMetabox::class,
     );
 
     /**
