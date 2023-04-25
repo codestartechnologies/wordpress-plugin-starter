@@ -19,7 +19,7 @@ use WPS_Plugin\App\Hooks;
 use WPS_Plugin\App\Public\Hooks as PublicHooks;
 use WPS_Plugin\App\Constants as AppConstants;
 use Codestartechnologies\WordpressPluginStarter\Core\Activator;
-use Codestartechnologies\WordpressPluginStarter\Core\Bootstrap;
+use Codestartechnologies\WordpressPluginStarter\Core\PluginCore;
 use Codestartechnologies\WordpressPluginStarter\Core\Constants;
 use Codestartechnologies\WordpressPluginStarter\Core\DatabaseUpgrade;
 use Codestartechnologies\WordpressPluginStarter\Core\DatabaseUpgradeNotice;
@@ -61,10 +61,10 @@ final class Plugin
      * Object that bootstrap the core functionalities of the plugin.
      *
      * @access private
-     * @var Bootstrap
+     * @var PluginCore
      * @since 1.0.0
      */
-    private Bootstrap $bootstrap;
+    private PluginCore $plugin_core;
 
     /**
      * DatabaseUpgrade Class
@@ -217,7 +217,7 @@ final class Plugin
      */
     public function run() : void
     {
-        $this->bootstrap = new Bootstrap(
+        $this->plugin_core = new PluginCore(
             new Router(),
             $this->database_upgrade,
             new DatabaseUpgradeNotice(),
@@ -240,6 +240,6 @@ final class Plugin
             self::boot( Bindings::$post_columns ),
             self::boot( Bindings::$taxonomy_fields )
         );
-        $this->bootstrap->init();
+        $this->plugin_core->init();
     }
 }

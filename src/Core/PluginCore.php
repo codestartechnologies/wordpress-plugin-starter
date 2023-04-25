@@ -1,8 +1,8 @@
 <?php
 /**
- * Bootstrap class file.
+ * PluginCore class file.
  *
- * This file contains Bootstrap class which bootstraps all the functionalties needed by your plugin.
+ * This file contains PluginCore class which bootstraps all the functionalties needed by your plugin.
  *
  * @package    WordpressPluginStarter
  * @author     Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -40,14 +40,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Bootstrap class
+ * PluginCore class
  *
  * This class handles and manages all functionalities needed by this plugin.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
  */
-final class Bootstrap implements ActionHook
+final class PluginCore implements ActionHook
 {
 
     use Validator;
@@ -242,7 +242,7 @@ final class Bootstrap implements ActionHook
     protected array $taxonomy_form_fields;
 
     /**
-     * Bootstrap Class Constructor
+     * PluginCore Class Constructor
      *
      * @access public
      * @param Router|null $router
