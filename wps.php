@@ -16,7 +16,6 @@ namespace Codestartechnologies\WordpressPluginStarter;
 use WPS_Plugin\App\Admin\Hooks as AdminHooks;
 use WPS_Plugin\App\Bindings;
 use WPS_Plugin\App\Hooks;
-use WPS_Plugin\App\Public\Hooks as PublicHooks;
 use WPS_Plugin\App\Constants as AppConstants;
 use Codestartechnologies\WordpressPluginStarter\Core\Activator;
 use Codestartechnologies\WordpressPluginStarter\Core\PluginCore;
@@ -223,7 +222,6 @@ final class Plugin
             new DatabaseUpgradeNotice(),
             new Hooks,
             new AdminHooks(),
-            new PublicHooks(),
             self::boot( Bindings::$menus ),
             self::boot( Bindings::$sub_menus ),
             self::boot( Bindings::$setting_menus ),
