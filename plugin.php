@@ -57,7 +57,9 @@ final class Plugin
     private static Plugin $instance;
 
     /**
-     * Object that bootstrap the core functionalities of the plugin.
+     * PluginCore class
+     *
+     * Main class for managing all plugin functionalities.
      *
      * @access private
      * @var PluginCore
@@ -73,6 +75,150 @@ final class Plugin
      * @since 1.0.0
      */
     private DatabaseUpgrade $database_upgrade;
+
+    /**
+     * Post Types
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $post_types;
+
+    /**
+     * Taxonomies
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $taxonomies;
+
+    /**
+     * Database Tables
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $database_tables;
+
+    /**
+     * Settings
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $settings;
+
+    /**
+     * Post Meta boxes
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $post_metaboxes;
+
+    /**
+     * Admin Pages
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $menus;
+
+    /**
+     * Sub Menu Pages
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $sub_menus;
+
+    /**
+     * "Settings" Pages
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $setting_menus;
+
+    /**
+     * "Plugins" Pages
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $plugin_menus;
+
+    /**
+     * Shortcodes
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $shortcodes;
+
+    /**
+     * Nav Menu Meta Boxes
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $nav_menu_metaboxes;
+
+    /**
+     * Admin Notices
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $admin_notices;
+
+    /**
+     * Admin Ajax Requests
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $admin_ajax_requests;
+
+    /**
+     * Front-end Ajax Requests
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $public_ajax_requests;
+
+    /**
+     * Post Columns
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $post_columns;
+
+    /**
+     * Taxonomy Form Fields
+     *
+     * @access private
+     * @var array
+     * @since 1.0.0
+     */
+    private array $taxonomy_fields;
 
     /**
      * Plugin constructor
@@ -99,8 +245,11 @@ final class Plugin
         // Define custom constants.
         AppConstants::define_constants();
 
+        // Initialize WPSPlugin class properties.
+        $this->setup();
+
         // Initialize DatabaseUpgrade class for performing database upgrade when needed.
-        $this->database_upgrade = new DatabaseUpgrade( self::boot( Bindings::$database_tables ) );
+        $this->database_upgrade = new DatabaseUpgrade( $this->database_tables );
 
         // Sets the activation hook for a plugin.
         register_activation_hook( WPS_FILE, function () {
@@ -119,6 +268,33 @@ final class Plugin
     }
 
     /**
+     * Sets up plugin dependencies
+     *
+     * @access private
+     * @return void
+     * @since 1.0.0
+     */
+    private function setup() : void
+    {
+        $this->post_types = self::create_objects( Bindings::$post_types );
+        $this->taxonomies = self::create_objects( Bindings::$taxonomies );
+        $this->database_tables = self::create_objects( Bindings::$database_tables );
+        $this->settings = self::create_objects( Bindings::$settings );
+        $this->post_metaboxes = self::create_objects( Bindings::$post_metaboxes );
+        $this->menus = self::create_objects( Bindings::$menus );
+        $this->sub_menus = self::create_objects( Bindings::$sub_menus );
+        $this->setting_menus = self::create_objects( Bindings::$setting_menus );
+        $this->plugin_menus = self::create_objects( Bindings::$plugin_menus );
+        $this->shortcodes = self::create_objects( Bindings::$shortcodes );
+        $this->nav_menu_metaboxes = self::create_objects( Bindings::$nav_menu_metaboxes );
+        $this->admin_notices = self::create_objects( Bindings::$admin_notices );
+        $this->admin_ajax_requests = self::create_objects( Bindings::$admin_ajax_requests );
+        $this->public_ajax_requests = self::create_objects( Bindings::$public_ajax_requests );
+        $this->post_columns = self::create_objects( Bindings::$post_columns );
+        $this->taxonomy_fields = self::create_objects( Bindings::$taxonomy_fields );
+    }
+
+    /**
      * Fires when plugin is activated
      *
      * @access public
@@ -129,8 +305,8 @@ final class Plugin
     public function activate( Activator $activator ) : void
     {
         $activator->run(
-            self::boot( Bindings::$post_types ),
-            self::boot( Bindings::$taxonomies )
+            $this->post_types,
+            $this->taxonomies
         );
     }
 
@@ -145,8 +321,8 @@ final class Plugin
     public function deactivate( Deactivator $deactivator ) : void
     {
         $deactivator->run(
-            self::boot( Bindings::$post_types ),
-            self::boot( Bindings::$taxonomies )
+            $this->post_types,
+            $this->taxonomies
         );
     }
 
@@ -161,9 +337,9 @@ final class Plugin
     public static function uninstall() : void
     {
         Uninstaller::run(
-            self::boot( Bindings::$settings ),
-            self::boot( Bindings::$post_metaboxes ),
-            new DatabaseUpgrade( self::boot( Bindings::$database_tables ) )
+            self::create_objects( Bindings::$settings ),
+            self::create_objects( Bindings::$post_metaboxes ),
+            new DatabaseUpgrade( self::create_objects( Bindings::$database_tables ) )
         );
         AppUninstaller::run();
     }
@@ -185,14 +361,14 @@ final class Plugin
     }
 
     /**
-     * Initialize classes.
+     * Create objects from classes.
      *
      * @access private
      * @param array $classes
      * @return array
      * @since 1.0.0
      */
-    private static function boot( array $classes = array() ) : array
+    private static function create_objects( array $classes = array() ) : array
     {
         $objects_array = array();
 
@@ -208,7 +384,7 @@ final class Plugin
     }
 
     /**
-     * Method to bootstrap all plugin functionalities.
+     * Initialize plugin with functionalities.
      *
      * @access public
      * @return void
@@ -222,21 +398,21 @@ final class Plugin
             new DatabaseUpgradeNotice(),
             new Hooks,
             new AdminHooks(),
-            self::boot( Bindings::$menus ),
-            self::boot( Bindings::$sub_menus ),
-            self::boot( Bindings::$setting_menus ),
-            self::boot( Bindings::$plugin_menus ),
-            self::boot( Bindings::$post_types ),
-            self::boot( Bindings::$taxonomies ),
-            self::boot( Bindings::$shortcodes ),
-            self::boot( Bindings::$post_metaboxes ),
-            self::boot( Bindings::$nav_menu_metaboxes ),
-            self::boot( Bindings::$settings ),
-            self::boot( Bindings::$admin_notices ),
-            self::boot( Bindings::$admin_ajax_requests ),
-            self::boot( Bindings::$public_ajax_requests ),
-            self::boot( Bindings::$post_columns ),
-            self::boot( Bindings::$taxonomy_fields )
+            $this->menus,
+            $this->sub_menus,
+            $this->setting_menus,
+            $this->plugin_menus,
+            $this->post_types,
+            $this->taxonomies,
+            $this->shortcodes,
+            $this->post_metaboxes,
+            $this->nav_menu_metaboxes,
+            $this->settings,
+            $this->admin_notices,
+            $this->admin_ajax_requests,
+            $this->public_ajax_requests,
+            $this->post_columns,
+            $this->taxonomy_fields
         );
         $this->plugin_core->init();
     }

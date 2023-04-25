@@ -56,7 +56,7 @@ if ( ! defined( 'WPS_FILE' ) ) {
 }
 
 // Require plugin main class file
-require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . 'wps.php';
+require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . 'plugin.php';
 
 // Initialize plugin main class
 $wps_plugin = Plugin::get_instance();
