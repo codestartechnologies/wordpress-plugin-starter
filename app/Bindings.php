@@ -2,7 +2,7 @@
 /**
  * Bindings class file.
  *
- * This file contains Bindings class which returns classes that will be registered with the plugin.
+ * This file contains Bindings class which is used to register classes that will add functionalities to the plugin.
  *
  * @package     WordpressPluginStarter
  * @author      Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -38,9 +38,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Bindings
+ * Bindings class
  *
- * This class returns classes that will be registered with the plugin.
+ * This class is used to register classes that will add functionalities to the plugin.
  *
  * @package WordpressPluginStarter
  * @author  Chijindu Nzeako <chijindunzeako517@gmail.com>
@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Bindings
 {
     /**
-     * Bindings for classes that register admin menus
+     * Classes that will create admin pages.
      *
      * @static
      * @access public
@@ -60,7 +60,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register submenus
+     * Classes that will create sub-menu pages.
      *
      * @static
      * @access public
@@ -72,7 +72,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register setting menus
+     * Classes that will create admin pages under `Settings`.
      *
      * @static
      * @access public
@@ -84,7 +84,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register plugin menus
+     * Classes that will create admin pages under `Plugins`.
      *
      * @static
      * @access public
@@ -96,7 +96,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register post types
+     * Classes that register custom post types
      *
      * @static
      * @access public
@@ -108,7 +108,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register taxonomies
+     * Classes that register custom taxonomies
      *
      * @static
      * @access public
@@ -120,7 +120,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register shortcodes
+     * Classes that register shortcodes
      *
      * @static
      * @access public
@@ -133,7 +133,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register post metaboxes
+     * Classes that register post metaboxes
      *
      * @static
      * @access public
@@ -146,7 +146,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register nav menu metaboxes
+     * Classes that will create nav menu metaboxes
      *
      * @static
      * @access public
@@ -158,7 +158,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that register settings
+     * Classes that will create settings sections and fields.
      *
      * @static
      * @access public
@@ -170,7 +170,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that create admin notices
+     * Classes that will create admin notifications.
      *
      * @static
      * @access public
@@ -182,7 +182,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that create admin ajax requests
+     * Classes that will handle ajax requests in the admin area.
      *
      * @static
      * @access public
@@ -194,7 +194,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that create public ajax requests
+     * Classes that will handle ajax requests on site front-end.
      *
      * @static
      * @access public
@@ -206,7 +206,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that create post columns
+     * Classes that will create post columns.
      *
      * @static
      * @access public
@@ -218,7 +218,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that create taxonomy fields
+     * Classes that will create taxonomy form fields.
      *
      * @static
      * @access public
@@ -230,7 +230,7 @@ final class Bindings
     );
 
     /**
-     * Bindings for classes that create database tables
+     * Classes that will create database tables.
      *
      * @static
      * @access public
