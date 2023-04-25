@@ -22,6 +22,7 @@ use Codestartechnologies\WordpressPluginStarter\Core\Activator;
 use Codestartechnologies\WordpressPluginStarter\Core\Bootstrap;
 use Codestartechnologies\WordpressPluginStarter\Core\Constants;
 use Codestartechnologies\WordpressPluginStarter\Core\DatabaseUpgrade;
+use Codestartechnologies\WordpressPluginStarter\Core\DatabaseUpgradeNotice;
 use Codestartechnologies\WordpressPluginStarter\Core\Deactivator;
 use Codestartechnologies\WordpressPluginStarter\Core\Router;
 use Codestartechnologies\WordpressPluginStarter\Core\Uninstaller;
@@ -219,6 +220,7 @@ final class Plugin
         $this->bootstrap = new Bootstrap(
             new Router(),
             $this->database_upgrade,
+            new DatabaseUpgradeNotice(),
             new Hooks,
             new AdminHooks(),
             new PublicHooks(),

@@ -71,6 +71,15 @@ final class Bootstrap implements ActionHook
     protected DatabaseUpgrade $database_upgrade;
 
     /**
+     * This class prints a database upgrade notification on the screen.
+     *
+     * @access protected
+     * @var DatabaseUpgradeNotice
+     * @since 1.0.0
+     */
+    protected DatabaseUpgradeNotice $database_upgrade_notice;
+
+    /**
      * This class registers hooks that will run at the fornt-end and admin area.
      *
      * @access protected
@@ -238,6 +247,7 @@ final class Bootstrap implements ActionHook
      * @access public
      * @param Router|null $router
      * @param DatabaseUpgrade $database_upgrade
+     * @param DatabaseUpgradeNotice $database_upgrade_notice
      * @param Hooks|null $hooks
      * @param AdminHooks|null $admin_hooks
      * @param PublicHooks|null $public_hooks
@@ -261,6 +271,7 @@ final class Bootstrap implements ActionHook
     public function __construct(
         Router $router = null,
         DatabaseUpgrade $database_upgrade = null,
+        DatabaseUpgradeNotice $database_upgrade_notice = null,
         Hooks $hooks = null,
         AdminHooks $admin_hooks = null,
         PublicHooks $public_hooks = null,
@@ -288,6 +299,10 @@ final class Bootstrap implements ActionHook
 
         if ( ! is_null( $database_upgrade ) && ( $database_upgrade instanceof DatabaseUpgrade ) ) {
             $this->database_upgrade = $database_upgrade;
+        }
+
+        if ( ! is_null( $database_upgrade_notice ) && ( $database_upgrade_notice instanceof DatabaseUpgradeNotice ) ) {
+            $this->database_upgrade_notice = $database_upgrade_notice;
         }
 
         if ( ! is_null( $hooks ) ) {
@@ -381,6 +396,10 @@ final class Bootstrap implements ActionHook
         $this->set_shortcodes();
 
         $this->set_ajax_handlers();
+
+        if ( isset( $this->database_upgrade_notice ) ) {
+            $this->database_upgrade_notice->register_add_action();
+        }
     }
 
     /**
