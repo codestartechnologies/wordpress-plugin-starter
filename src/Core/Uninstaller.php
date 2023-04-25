@@ -57,10 +57,11 @@ final class Uninstaller
      * @access public
      * @param array|null $settings
      * @param array|null $post_metas
+     * @param DatabaseUpgrade $database_upgrade
      * @return void
      * @since 1.0.0
      */
-    public static function run( ?array $settings = null, ?array $post_metas = null ) : void
+    public static function run( ?array $settings = null, ?array $post_metas = null, DatabaseUpgrade $database_upgrade ) : void
     {
         self::$settings = $settings;
 
@@ -69,6 +70,8 @@ final class Uninstaller
         self::delete_settings();
 
         self::delete_post_metas();
+
+        $database_upgrade->drop_database_tables();
     }
 
     /**

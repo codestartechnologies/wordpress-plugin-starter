@@ -62,6 +62,15 @@ final class Bootstrap implements ActionHook
     protected Router $router;
 
     /**
+     * This class creates database tables needed by the plugin.
+     *
+     * @access protected
+     * @var DatabaseUpgrade
+     * @since 1.0.0
+     */
+    protected DatabaseUpgrade $database_upgrade;
+
+    /**
      * This class registers hooks that will run at the fornt-end and admin area.
      *
      * @access protected
@@ -228,6 +237,7 @@ final class Bootstrap implements ActionHook
      *
      * @access public
      * @param Router|null $router
+     * @param DatabaseUpgrade $database_upgrade
      * @param Hooks|null $hooks
      * @param AdminHooks|null $admin_hooks
      * @param PublicHooks|null $public_hooks
@@ -250,6 +260,7 @@ final class Bootstrap implements ActionHook
      */
     public function __construct(
         Router $router = null,
+        DatabaseUpgrade $database_upgrade = null,
         Hooks $hooks = null,
         AdminHooks $admin_hooks = null,
         PublicHooks $public_hooks = null,
@@ -273,6 +284,10 @@ final class Bootstrap implements ActionHook
 
         if ( ! is_null( $router ) ) {
             $this->router = $router;
+        }
+
+        if ( ! is_null( $database_upgrade ) && ( $database_upgrade instanceof DatabaseUpgrade ) ) {
+            $this->database_upgrade = $database_upgrade;
         }
 
         if ( ! is_null( $hooks ) ) {
@@ -377,6 +392,8 @@ final class Bootstrap implements ActionHook
      */
     public function register_add_action() : void
     {
+        add_action( 'admin_init', array( $this, 'action_admin_init' ) );
+
         if ( isset( $this->hooks ) ) {
             $this->hooks->register_add_action();
             $this->hooks->register_add_filter();
@@ -618,5 +635,40 @@ final class Bootstrap implements ActionHook
                 $ajax_request->register_add_action();
             }
         }
+    }
+
+    /**
+     * Fires as an admin screen or script is being initialized.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function action_admin_init() : void
+    {
+        // Handle database upgrade
+        if (
+            isset( $_GET['wps_database_upgrade'] ) &&
+            isset( $_GET['_wpnonce'] ) &&
+            wp_verify_nonce( $_GET['_wpnonce'], 'handle_db_upgrade' )
+        ) {
+            $this->handle_database_upgrade();
+        }
+    }
+
+    /**
+     * Performs a database upgrade
+     *
+     * @access private
+     * @return void
+     * @since 1.0.0
+     */
+    private function handle_database_upgrade() : void
+    {
+        if ( $this->database_upgrade->can_perform_upgrade() ) {
+            $this->database_upgrade->run_upgrade();
+        }
+
+        wp_safe_redirect( admin_url() );
+        exit;
     }
 }

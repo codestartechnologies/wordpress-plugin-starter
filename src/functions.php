@@ -172,3 +172,20 @@ if ( ! function_exists( 'wps_load_view' ) ) {
         }
     }
 }
+
+if ( ! function_exists( 'wps_db_table_exists' ) ) {
+    /**
+     * Checks if a table exists in the database
+     *
+     * @param string $table_name Database table name to check for
+     * @return boolean
+     * @since 1.0.0
+     */
+    function wps_db_table_exists( string $table_name ) : bool
+    {
+        global $wpdb;
+        $database_name = DB_NAME ?? null;
+        $query = "SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$database_name}' AND TABLE_NAME = '{$table_name}'";
+        return ( intval( $wpdb->get_var( $query ) ) > 0 );
+    }
+}

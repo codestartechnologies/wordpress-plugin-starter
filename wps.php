@@ -21,6 +21,7 @@ use WPS_Plugin\App\Constants as AppConstants;
 use Codestartechnologies\WordpressPluginStarter\Core\Activator;
 use Codestartechnologies\WordpressPluginStarter\Core\Bootstrap;
 use Codestartechnologies\WordpressPluginStarter\Core\Constants;
+use Codestartechnologies\WordpressPluginStarter\Core\DatabaseUpgrade;
 use Codestartechnologies\WordpressPluginStarter\Core\Deactivator;
 use Codestartechnologies\WordpressPluginStarter\Core\Router;
 use Codestartechnologies\WordpressPluginStarter\Core\Uninstaller;
@@ -65,6 +66,15 @@ final class Plugin
     private Bootstrap $bootstrap;
 
     /**
+     * DatabaseUpgrade Class
+     *
+     * @access private
+     * @var DatabaseUpgrade
+     * @since 1.0.0
+     */
+    private DatabaseUpgrade $database_upgrade;
+
+    /**
      * Plugin constructor
      *
      * @access private
@@ -89,9 +99,12 @@ final class Plugin
         // Define custom constants.
         AppConstants::define_constants();
 
+        // Initialize DatabaseUpgrade class for performing database upgrade when needed.
+        $this->database_upgrade = new DatabaseUpgrade( self::boot( Bindings::$database_tables ) );
+
         // Sets the activation hook for a plugin.
         register_activation_hook( WPS_FILE, function () {
-            $this->activate( new Activator() );
+            $this->activate( new Activator( $this->database_upgrade ) );
             AppActivator::run();
         } );
 
@@ -149,7 +162,8 @@ final class Plugin
     {
         Uninstaller::run(
             self::boot( Bindings::$settings ),
-            self::boot( Bindings::$post_metaboxes )
+            self::boot( Bindings::$post_metaboxes ),
+            new DatabaseUpgrade( self::boot( Bindings::$database_tables ) )
         );
         AppUninstaller::run();
     }
@@ -204,6 +218,7 @@ final class Plugin
     {
         $this->bootstrap = new Bootstrap(
             new Router(),
+            $this->database_upgrade,
             new Hooks,
             new AdminHooks(),
             new PublicHooks(),

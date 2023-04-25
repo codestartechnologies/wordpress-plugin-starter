@@ -48,6 +48,16 @@ final class Constants
             define( 'PLUGIN_VERSION', $_ENV['PLUGIN_VERSION'] ?? 'YOUR_PLUGIN_VERSION' );
         }
 
+        // Plugin current database version
+        if ( ! defined( 'PLUGIN_DB_VERSION' ) ) {
+            define( 'PLUGIN_DB_VERSION', $_ENV['PLUGIN_DB_VERSION'] ?? 1 );
+        }
+
+        // Plugin last database version setting identifier
+        if ( ! defined( 'PLUGIN_DB_VERSION_SETTING_NAME' ) ) {
+            define( 'PLUGIN_DB_VERSION_SETTING_NAME', $_ENV['PLUGIN_DB_VERSION_SETTING_NAME'] ?? 'wps_db_version' );
+        }
+
         /**
          * Define your custom constants below. It is recommended you check for existence of a constant before defining it.
          */

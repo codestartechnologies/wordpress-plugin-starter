@@ -15,6 +15,7 @@ namespace WPS_Plugin\App;
 
 use WPS_Plugin\App\Admin\AdminNotices\WPSAdminNotice;
 use WPS_Plugin\App\Admin\AjaxRequests\WPSAdminAjaxRequest;
+use WPS_Plugin\App\Admin\DatabaseTables\WPSUsersTable;
 use WPS_Plugin\App\Admin\Menus\WPSMenu;
 use WPS_Plugin\App\Admin\Menus\WPSPluginMenu;
 use WPS_Plugin\App\Admin\Menus\WPSSettingMenu;
@@ -226,5 +227,17 @@ final class Bindings
      */
     public static array $taxonomy_fields = array(
         WPSTaxonomyFormField::class,
+    );
+
+    /**
+     * Bindings for classes that create database tables
+     *
+     * @static
+     * @access public
+     * @var array
+     * @since 1.0.0
+     */
+    public static array $database_tables = array(
+        WPSUsersTable::class,
     );
 }
